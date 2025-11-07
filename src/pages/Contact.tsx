@@ -31,19 +31,19 @@ const Contact: React.FC = () => {
     {
       icon: mail,
       title: 'Email',
-      value: 'tu.email@ejemplo.com',
+      value: 'bonvincode@gmail.com',
       description: 'Respondo en 24 horas'
     },
     {
       icon: call,
       title: 'Teléfono',
-      value: '+34 123 456 789',
+      value: '+33 7 49 39 31 07',
       description: 'Llamadas y WhatsApp'
     },
     {
       icon: location,
       title: 'Ubicación',
-      value: 'Madrid, España',
+      value: 'Lille, Francia',
       description: 'Disponible para viajes'
     },
     {
