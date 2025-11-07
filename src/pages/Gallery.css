@@ -134,6 +134,7 @@
 
 /* Mobile: Solo iconos */
 @media (max-width: 768px) {
+  /* Categorías - solo iconos en mobile */
   .category-filter {
     padding: var(--spacing-sm);
   }
@@ -143,7 +144,7 @@
   }
   
   .category-btn {
-    margin: 0 1px;
+    margin: 0 2px;
     padding: var(--spacing-sm);
     min-width: 50px;
     max-width: 50px;
@@ -161,42 +162,6 @@
   .category-label {
     display: none;
   }
-
-/* Grid responsivo mejorado */
-ion-grid {
-  padding: 0 var(--spacing-md);
-}
-
-ion-col {
-  padding: var(--spacing-xs);
-}
-
-/* Responsive design para mobile */
-@media (max-width: 768px) {
-  /* Categorías - solo iconos en mobile */
-  .category-filter {
-    padding: var(--spacing-sm);
-  }
-  
-  .category-segment {
-    padding: var(--spacing-xs) 2px;
-  }
-  
-  .category-btn {
-    margin: 0 2px;
-    padding: var(--spacing-xs) 4px;
-    min-width: 50px;
-    max-width: 60px;
-  }
-  
-  .category-icon {
-    font-size: 20px;
-    margin-bottom: 0;
-  }
-  
-  .category-label {
-    display: none; /* Ocultar texto en mobile */
-  }
   
   /* Fotos */
   .photo-card {
@@ -208,6 +173,7 @@ ion-col {
     width: 100%;
   }
   
+  /* Grid */
   ion-grid {
     padding: 0 var(--spacing-sm);
   }
@@ -224,6 +190,15 @@ ion-col {
     --background: var(--ion-color-secondary);
     display: block !important;
   }
+}
+
+/* Grid responsivo */
+ion-grid {
+  padding: 0 var(--spacing-md);
+}
+
+ion-col {
+  padding: var(--spacing-xs);
 }
 
 @media (min-width: 1200px) {
