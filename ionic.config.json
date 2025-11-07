@@ -1,0 +1,7 @@
+{
+  "name": "portfolio-fotografia",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
