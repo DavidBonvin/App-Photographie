@@ -1,0 +1,144 @@
+{
+  "app": {
+    "title": "Mi Portafolio"
+  },
+  "navigation": {
+    "gallery": "Galería",
+    "about": "Sobre mí",
+    "contact": "Contacto"
+  },
+  "gallery": {
+    "title": "Mi Portafolio",
+    "categories": {
+      "all": "Todas",
+      "nature": "Naturaleza",
+      "architecture": "Arquitectura",
+      "street": "Street",
+      "conceptual": "Conceptual"
+    },
+    "photos": {
+      "naturalComposition": {
+        "title": "Composición Natural",
+        "description": "Captura de elementos naturales con enfoque artístico"
+      },
+      "uniquePerspective": {
+        "title": "Perspectiva Única",
+        "description": "Juego de luces y sombras en espacios urbanos"
+      },
+      "capturedMoment": {
+        "title": "Momento Capturado",
+        "description": "Fotografía callejera con narrativa visual"
+      },
+      "urbanDetails": {
+        "title": "Detalles Urbanos",
+        "description": "Enfoque en texturas y formas arquitectónicas"
+      },
+      "everydayScene": {
+        "title": "Escena Cotidiana",
+        "description": "La belleza en los momentos ordinarios"
+      },
+      "visualExpression": {
+        "title": "Expresión Visual",
+        "description": "Exploración de conceptos a través de la imagen"
+      },
+      "abstractComposition": {
+        "title": "Composición Abstracta",
+        "description": "Interpretación artística de formas y colores"
+      }
+    },
+    "viewComplete": "Ver completa"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "profile": {
+      "name": "David Cordoba",
+      "subtitle": "Fotógrafo"
+    },
+    "sections": {
+      "myStory": {
+        "title": "Mi Historia",
+        "content1": "Soy un fotógrafo apasionado con experiencia capturando momentos únicos y creando imágenes que cuentan historias. Mi especialidad abarca desde retratos íntimos hasta paisajes espectaculares, siempre buscando la perfecta combinación entre técnica y creatividad.",
+        "content2": "Mi filosofía se basa en capturar la esencia auténtica de cada momento, ya sea en una sesión de retrato, una boda especial o un paisaje natural. Cada fotografía es una oportunidad de contar una historia única."
+      },
+      "specialties": {
+        "title": "Especialidades",
+        "skills": [
+          "Fotografía de Retrato",
+          "Fotografía de Paisaje",
+          "Fotografía de Eventos",
+          "Edición Digital",
+          "Lightroom",
+          "Photoshop",
+          "Fotografía Nocturna",
+          "Fotografía de Producto"
+        ]
+      },
+      "activities": {
+        "title": "Mis Actividades",
+        "items": [
+          {
+            "title": "Concepteur Développeur",
+            "description": "Marcq-en-Barœul, Francia"
+          },
+          {
+            "title": "Músico - Los Parceros del Norte",
+            "description": "Grupo de cumbia colombiana"
+          },
+          {
+            "title": "Presidente de Asociación",
+            "description": "Pasos Prohibidos, Lille - Francia"
+          }
+        ]
+      },
+      "social": {
+        "title": "Sígueme en mis redes",
+        "platforms": {
+          "instagram": "Instagram",
+          "linkedin": "LinkedIn",
+          "twitter": "Twitter"
+        }
+      }
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "hero": {
+      "title": "¿Hablamos?",
+      "subtitle": "Estoy aquí para hacer realidad tu visión fotográfica"
+    },
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "phone": "Teléfono",
+      "message": "Mensaje",
+      "send": "Enviar Mensaje"
+    },
+    "details": {
+      "title": "Información de Contacto",
+      "email": "Email",
+      "phone": "Teléfono",
+      "location": "Ubicación"
+    },
+    "services": {
+      "title": "Servicios",
+      "portrait": {
+        "title": "Sesión de Retrato",
+        "price": "€150",
+        "duration": "2 horas",
+        "description": "Retratos profesionales individuales o familiares"
+      },
+      "event": {
+        "title": "Fotografía de Eventos",
+        "price": "€400",
+        "duration": "6 horas",
+        "description": "Cobertura completa de tu evento especial"
+      },
+      "commercial": {
+        "title": "Fotografía Comercial",
+        "price": "€200",
+        "duration": "3 horas",
+        "description": "Fotografía de producto y empresarial"
+      }
+    }
+  }
+}

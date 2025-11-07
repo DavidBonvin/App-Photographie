@@ -2,9 +2,15 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardC
 import { mail, call, location, send, time, camera } from 'ionicons/icons';
 import { useState } from 'react';
 import ThemeToggle from '../components/ThemeToggle';
+import LanguageSelector from '../components/LanguageSelector';
+import { useTranslation } from '../i18n/useTranslation';
 import './Contact.css';
 
 const Contact: React.FC = () => {
+  const { t, language } = useTranslation();
+  
+  console.log('Contact component re-rendered with language:', language);
+  console.log('Contact title translation:', t('contact.title'));
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,88 +30,89 @@ const Contact: React.FC = () => {
     e.preventDefault();
     // Aquí iría la lógica para enviar el formulario
     console.log('Formulario enviado:', formData);
-    alert('¡Mensaje enviado! Te contactaré pronto.');
+    alert(t('contact.form.successMessage'));
   };
 
   const contactInfo = [
     {
       icon: mail,
-      title: 'Email',
-      value: 'bonvincode@gmail.com',
-      description: 'Respondo en 24 horas'
+      title: t('contact.info.email.title'),
+      value: t('contact.info.email.value'),
+      description: t('contact.info.email.description')
     },
     {
       icon: call,
-      title: 'Teléfono',
-      value: '+33 7 49 39 31 07',
-      description: 'Llamadas y WhatsApp'
+      title: t('contact.info.phone.title'),
+      value: t('contact.info.phone.value'),
+      description: t('contact.info.phone.description')
     },
     {
       icon: location,
-      title: 'Ubicación',
-      value: 'Lille, Francia',
-      description: 'Disponible para viajes'
+      title: t('contact.info.location.title'),
+      value: t('contact.info.location.value'),
+      description: t('contact.info.location.description')
     },
     {
       icon: time,
-      title: 'Horario',
-      value: 'Lun - Vie: 9:00 - 18:00',
-      description: 'Fines de semana por cita'
+      title: t('contact.info.schedule.title'),
+      value: t('contact.info.schedule.value'),
+      description: t('contact.info.schedule.description')
     }
   ];
 
   const services = [
     {
-      title: 'Sesiones de Retrato',
-      price: 'Desde 150€',
-      duration: '1-2 horas',
-      includes: 'Edición profesional incluida'
+      title: t('contact.services.portrait.title'),
+      price: t('contact.services.portrait.price'),
+      duration: t('contact.services.portrait.duration'),
+      includes: t('contact.services.portrait.includes')
     },
     {
-      title: 'Fotografía de Eventos',
-      price: 'Desde 300€',
-      duration: 'Evento completo',
-      includes: 'Entrega en 48-72 horas'
+      title: t('contact.services.wedding.title'),
+      price: t('contact.services.wedding.price'),
+      duration: t('contact.services.wedding.duration'),
+      includes: t('contact.services.wedding.includes')
     },
     {
-      title: 'Fotografía de Producto',
-      price: 'Desde 80€',
-      duration: 'Por producto',
-      includes: 'Fondo neutro incluido'
+      title: t('contact.services.commercial.title'),
+      price: t('contact.services.commercial.price'),
+      duration: t('contact.services.commercial.duration'),
+      includes: t('contact.services.commercial.includes')
     }
   ];
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar key={`contact-toolbar-${language}`}>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Contacto</IonTitle>
+          <IonTitle>{t('contact.title')}</IonTitle>
           <IonButtons slot="end">
+            <LanguageSelector />
             <ThemeToggle />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Contacto</IonTitle>
+          <IonToolbar key={`contact-condense-toolbar-${language}`}>
+            <IonTitle size="large">{t('contact.title')}</IonTitle>
           </IonToolbar>
         </IonHeader>
         
         {/* Hero section */}
         <div className="contact-hero">
-          <h2>¡Trabajemos juntos!</h2>
-          <p>Estoy aquí para capturar tus momentos más especiales</p>
+          <h2>{t('contact.hero.title')}</h2>
+          <p>{t('contact.hero.subtitle')}</p>
         </div>
 
         {/* Información de contacto */}
         <IonGrid>
           <IonRow>
             {contactInfo.map((info, index) => (
-              <IonCol size="12" sizeMd="6" key={index}>
+              <IonCol size="12" sizeMd="6" key={`contact-info-${index}-${language}`}>
                 <IonCard className="contact-info-card">
                   <IonCardContent>
                     <div className="contact-info-item">
@@ -128,58 +135,58 @@ const Contact: React.FC = () => {
           <IonCardHeader>
             <IonCardTitle>
               <IonIcon icon={send} className="section-icon" />
-              Envíame un mensaje
+              {t('contact.form.title')}
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             <form onSubmit={handleSubmit}>
               <IonList>
                 <IonItem>
-                  <IonLabel position="stacked">Nombre completo *</IonLabel>
+                  <IonLabel position="stacked">{t('contact.form.name')} *</IonLabel>
                   <IonInput
                     value={formData.name}
                     onIonInput={(e) => handleInputChange('name', e.detail.value!)}
-                    placeholder="Tu nombre"
+                    placeholder={t('contact.form.namePlaceholder')}
                     required
                   />
                 </IonItem>
                 
                 <IonItem>
-                  <IonLabel position="stacked">Email *</IonLabel>
+                  <IonLabel position="stacked">{t('contact.form.email')} *</IonLabel>
                   <IonInput
                     type="email"
                     value={formData.email}
                     onIonInput={(e) => handleInputChange('email', e.detail.value!)}
-                    placeholder="tu@email.com"
+                    placeholder={t('contact.form.emailPlaceholder')}
                     required
                   />
                 </IonItem>
                 
                 <IonItem>
-                  <IonLabel position="stacked">Teléfono</IonLabel>
+                  <IonLabel position="stacked">{t('contact.form.phone')}</IonLabel>
                   <IonInput
                     type="tel"
                     value={formData.phone}
                     onIonInput={(e) => handleInputChange('phone', e.detail.value!)}
-                    placeholder="+34 123 456 789"
+                    placeholder={t('contact.form.phonePlaceholder')}
                   />
                 </IonItem>
                 
                 <IonItem>
-                  <IonLabel position="stacked">Tipo de sesión</IonLabel>
+                  <IonLabel position="stacked">{t('contact.form.subject')}</IonLabel>
                   <IonInput
                     value={formData.subject}
                     onIonInput={(e) => handleInputChange('subject', e.detail.value!)}
-                    placeholder="Retrato, evento, producto..."
+                    placeholder={t('contact.form.subjectPlaceholder')}
                   />
                 </IonItem>
                 
                 <IonItem>
-                  <IonLabel position="stacked">Mensaje *</IonLabel>
+                  <IonLabel position="stacked">{t('contact.form.message')} *</IonLabel>
                   <IonTextarea
                     value={formData.message}
                     onIonInput={(e) => handleInputChange('message', e.detail.value!)}
-                    placeholder="Cuéntame más sobre tu proyecto..."
+                    placeholder={t('contact.form.messagePlaceholder')}
                     rows={4}
                     required
                   />
@@ -189,7 +196,7 @@ const Contact: React.FC = () => {
               <div className="form-actions">
                 <IonButton type="submit" expand="block" color="primary">
                   <IonIcon icon={send} slot="start" />
-                  Enviar mensaje
+                  {t('contact.form.send')}
                 </IonButton>
               </div>
             </form>
@@ -201,14 +208,14 @@ const Contact: React.FC = () => {
           <IonCardHeader>
             <IonCardTitle>
               <IonIcon icon={camera} className="section-icon" />
-              Servicios y Tarifas
+              {t('contact.services.title')}
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             <IonGrid>
               <IonRow>
                 {services.map((service, index) => (
-                  <IonCol size="12" sizeMd="4" key={index}>
+                  <IonCol size="12" sizeMd="4" key={`service-${index}-${language}`}>
                     <div className="service-card">
                       <h3>{service.title}</h3>
                       <div className="service-price">{service.price}</div>

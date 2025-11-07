@@ -1,6 +1,6 @@
 .category-filter {
   padding: var(--spacing-md);
-  background: var(--ion-color-light);
+  background: var(--ion-color-secondary);
   margin-bottom: var(--spacing-sm);
 }
 
@@ -9,11 +9,17 @@
   transition: all var(--transition-normal);
   overflow: hidden;
   border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  position: relative;
 }
 
 .photo-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-medium);
+}
+
+.photo-card:active {
+  transform: translateY(-2px) scale(0.98);
 }
 
 .photo-card ion-img {
@@ -26,6 +32,32 @@
 
 .photo-card:hover ion-img {
   transform: scale(1.02);
+}
+
+/* Add a subtle overlay on hover */
+.photo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(56, 128, 255, 0.1);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.photo-card:hover::before {
+  opacity: 1;
+}
+
+/* Ensure card content is above overlay */
+.photo-card ion-card-header,
+.photo-card ion-card-content {
+  position: relative;
+  z-index: 2;
 }
 
 .photo-card ion-card-header {
@@ -182,13 +214,6 @@
   ion-col {
     padding: var(--spacing-xs);
     width: 100%;
-    display: block;
-  }
-  
-  /* Asegurar que el contenido de la página sea visible */
-  ion-content {
-    --background: var(--ion-color-secondary);
-    display: block !important;
   }
 }
 

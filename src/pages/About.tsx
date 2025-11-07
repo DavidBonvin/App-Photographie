@@ -1,84 +1,70 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonAvatar, IonButton, IonIcon, IonChip, IonLabel, IonButtons, IonMenuButton } from '@ionic/react';
-import { logoInstagram, logoLinkedin, logoTwitter, camera, trophy, star } from 'ionicons/icons';
+import { logoInstagram, logoLinkedin, logoTwitter, camera, star, code, musicalNotes, people } from 'ionicons/icons';
 import ThemeToggle from '../components/ThemeToggle';
+import LanguageSelector from '../components/LanguageSelector';
+import { useTranslation } from '../i18n/useTranslation';
 import './About.css';
 
 const About: React.FC = () => {
-  const skills = [
-    'Fotografía de Retrato',
-    'Fotografía de Paisaje',
-    'Fotografía de Eventos',
-    'Edición Digital',
-    'Lightroom',
-    'Photoshop',
-    'Fotografía Nocturna',
-    'Fotografía de Producto'
-  ];
+  const { language, t, tArray } = useTranslation();
+  
+  console.log('About component re-rendered with language:', language);
+  console.log('About title translation:', t('about.title'));
+  // Base URL para imágenes - funciona tanto local como en GitHub Pages
+  const baseUrl = import.meta.env.DEV ? '/' : import.meta.env.BASE_URL;
 
-  const achievements = [
-    {
-      year: '2023',
-      title: 'Premio Nacional de Fotografía',
-      description: 'Primer lugar en categoría paisajes'
-    },
-    {
-      year: '2022',
-      title: 'Exposición Individual',
-      description: 'Galería de Arte Contemporáneo'
-    },
-    {
-      year: '2021',
-      title: 'Certificación Profesional',
-      description: 'Instituto de Fotografía Digital'
-    }
-  ];
+  const skills = tArray('about.skills');
+
+  const activitiesData = tArray('about.activities') as unknown as Array<{title: string, description: string}>;
+  const activities = activitiesData.map((activity, index) => ({
+    icon: [code, musicalNotes, people][index],
+    title: activity.title,
+    description: activity.description
+  }));
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar key={`about-toolbar-${language}`}>
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Sobre mí</IonTitle>
+          <IonTitle>{t('about.title')}</IonTitle>
           <IonButtons slot="end">
+            <LanguageSelector />
             <ThemeToggle />
           </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Sobre mí</IonTitle>
+          <IonToolbar key={`about-condense-toolbar-${language}`}>
+            <IonTitle size="large">{t('about.title')}</IonTitle>
           </IonToolbar>
         </IonHeader>
         
         {/* Perfil personal */}
         <div className="profile-section">
           <IonAvatar className="profile-avatar">
-            <img src="/Fotografias/P1026360.jpg" alt="Foto de perfil" />
+            <img src={`${baseUrl}Fotografias/P1026360.jpg`} alt="Foto de perfil" />
           </IonAvatar>
-          <h2>Tu Nombre</h2>
-          <p className="profile-subtitle">Fotógrafo Profesional</p>
+          <h2>{t('about.name')}</h2>
+          <p className="profile-subtitle">{t('about.profession')}</p>
         </div>
 
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>
               <IonIcon icon={camera} className="section-icon" />
-              Mi Historia
+              {t('about.story.title')}
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             <p>
-              Soy un fotógrafo apasionado con experiencia capturando momentos únicos y 
-              creando imágenes que cuentan historias. Mi especialidad abarca desde retratos íntimos hasta 
-              paisajes espectaculares, siempre buscando la perfecta combinación entre técnica y creatividad.
+              {t('about.story.paragraph1')}
             </p>
             <p>
-              Mi filosofía se basa en capturar la esencia auténtica de cada momento, ya sea en una sesión 
-              de retrato, una boda especial o un paisaje natural. Cada fotografía es una oportunidad de 
-              contar una historia única.
+              {t('about.story.paragraph2')}
             </p>
           </IonCardContent>
         </IonCard>
@@ -88,13 +74,13 @@ const About: React.FC = () => {
           <IonCardHeader>
             <IonCardTitle>
               <IonIcon icon={star} className="section-icon" />
-              Especialidades
+              {t('about.specialties.title')}
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
             <div className="skills-container">
               {skills.map((skill, index) => (
-                <IonChip key={index} color="primary">
+                <IonChip key={`skill-${index}-${language}`} color="primary">
                   <IonLabel>{skill}</IonLabel>
                 </IonChip>
               ))}
@@ -102,21 +88,23 @@ const About: React.FC = () => {
           </IonCardContent>
         </IonCard>
 
-        {/* Logros */}
+        {/* Actividades */}
         <IonCard>
           <IonCardHeader>
             <IonCardTitle>
-              <IonIcon icon={trophy} className="section-icon" />
-              Logros y Reconocimientos
+              <IonIcon icon={star} className="section-icon" />
+              {t('about.activitiesTitle')}
             </IonCardTitle>
           </IonCardHeader>
           <IonCardContent>
-            {achievements.map((achievement, index) => (
-              <div key={index} className="achievement-item">
-                <div className="achievement-year">{achievement.year}</div>
+            {activities.map((activity, index) => (
+              <div key={`activity-${index}-${language}`} className="achievement-item">
+                <div className="achievement-icon">
+                  <IonIcon icon={activity.icon} />
+                </div>
                 <div className="achievement-content">
-                  <h3>{achievement.title}</h3>
-                  <p>{achievement.description}</p>
+                  <h3>{activity.title}</h3>
+                  <p>{activity.description}</p>
                 </div>
               </div>
             ))}

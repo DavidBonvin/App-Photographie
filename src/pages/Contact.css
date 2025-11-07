@@ -39,7 +39,7 @@
 .contact-details h3 {
   margin: 0 0 4px;
   font-size: 18px;
-  color: var(--ion-color-dark);
+  color: var(--ion-color-primary);
 }
 
 .contact-value {
@@ -75,7 +75,7 @@
 
 .service-card h3 {
   margin: 0 0 12px;
-  color: var(--ion-color-dark);
+  color: var(--ion-color-primary);
   font-size: 18px;
 }
 
@@ -95,7 +95,7 @@
 .service-card p {
   margin: 0;
   font-size: 14px;
-  color: var(--ion-color-dark);
+  color: var(--ion-color-tertiary);
   font-style: italic;
 }
 

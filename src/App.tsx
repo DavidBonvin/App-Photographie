@@ -18,6 +18,8 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { images, person, mail } from 'ionicons/icons';
+import { useTranslation } from './i18n/useTranslation';
+import SEOHead from './components/SEOHead';
 import Gallery from './pages/Gallery';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -51,32 +53,40 @@ import '@ionic/react/css/palettes/dark.system.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './styles/iphone-tabbar.css';
 
 setupIonicReact();
 
-const App: React.FC = () => (
+const App: React.FC = () => {
+  const { t, language } = useTranslation();
+  
+  console.log('App component re-rendered with language:', language);
+  console.log('Navigation gallery translation:', t('navigation.gallery'));
+  
+  return (
   <IonApp>
+    <SEOHead />
     <IonReactRouter>
       {/* Menú lateral para móvil */}
-      <IonMenu contentId="main-content" type="overlay">
+      <IonMenu contentId="main-content" type="overlay" key={`menu-${language}`}>
         <IonHeader>
           <IonToolbar>
-            <IonTitle>Portafolio</IonTitle>
+            <IonTitle>{t('navigation.portfolio')}</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonContent className="menu-content">
           <IonList className="menu-list">
             <IonItem button routerLink="/gallery" routerDirection="none">
               <IonIcon aria-hidden="true" icon={images} slot="start" />
-              <IonLabel>Galería</IonLabel>
+              <IonLabel>{t('navigation.gallery')}</IonLabel>
             </IonItem>
             <IonItem button routerLink="/about" routerDirection="none">
               <IonIcon aria-hidden="true" icon={person} slot="start" />
-              <IonLabel>Sobre mí</IonLabel>
+              <IonLabel>{t('navigation.about')}</IonLabel>
             </IonItem>
             <IonItem button routerLink="/contact" routerDirection="none">
               <IonIcon aria-hidden="true" icon={mail} slot="start" />
-              <IonLabel>Contacto</IonLabel>
+              <IonLabel>{t('navigation.contact')}</IonLabel>
             </IonItem>
           </IonList>
         </IonContent>
@@ -100,23 +110,24 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         
         {/* Tab bar simple */}
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="gallery" href="/gallery">
+        <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
+          <IonTabButton tab="gallery" href="/gallery" className="tab-button-gallery">
             <IonIcon aria-hidden="true" icon={images} />
-            <IonLabel>Galería</IonLabel>
+            <IonLabel>{t('navigation.gallery')}</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="about" href="/about">
+          <IonTabButton tab="about" href="/about" className="tab-button-about">
             <IonIcon aria-hidden="true" icon={person} />
-            <IonLabel>Sobre mí</IonLabel>
+            <IonLabel>{t('navigation.about')}</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="contact" href="/contact">
+          <IonTabButton tab="contact" href="/contact" className="tab-button-contact">
             <IonIcon aria-hidden="true" icon={mail} />
-            <IonLabel>Contacto</IonLabel>
+            <IonLabel>{t('navigation.contact')}</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
   </IonApp>
 );
+};
 
 export default App;

@@ -1,0 +1,319 @@
+/* iPhone-style Tab Bar Styles */
+
+/* Main tab bar container */
+ion-tab-bar {
+  --background: rgba(255, 255, 255, 0.85);
+  --border: 1px solid rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  height: 80px;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+  padding-top: 8px;
+  position: relative;
+  box-shadow: 
+    0 -1px 0 rgba(0, 0, 0, 0.05),
+    0 -8px 30px rgba(0, 0, 0, 0.02);
+  transition: all 0.2s ease;
+}
+
+/* Dark mode tab bar */
+@media (prefers-color-scheme: dark) {
+  ion-tab-bar {
+    --background: none;
+    --border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 -1px 0 rgba(255, 255, 255, 0.08),
+      0 -8px 30px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Individual tab buttons - Minimalista */
+ion-tab-button {
+  --color: var(--ion-color-tertiary);
+  --color-selected: var(--ion-color-primary);
+  --ripple-color: transparent;
+  background: transparent;
+  border: none;
+  transition: all 0.2s ease;
+  position: relative;
+  border-radius: 8px;
+  margin: 0 2px;
+  min-height: 50px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Light mode - mejor contraste para seleccionado */
+@media (prefers-color-scheme: light) {
+  ion-tab-button.tab-selected {
+    --color-selected: var(--ion-color-tertiary);
+  }
+}
+
+/* Dark mode tab buttons - Botones negros con iconos/texto claros */
+@media (prefers-color-scheme: dark) {
+  ion-tab-button {
+    --color: var(--ion-color-tertiary);
+    --color-selected: var(--ion-color-primary);
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  ion-tab-button.tab-selected {
+    background: rgba(0, 0, 0, 0.9);
+    --color-selected: var(--ion-color-primary);
+  }
+}
+
+/* Tab button hover effect - Minimalista */
+ion-tab-button:hover {
+  --color: var(--ion-color-primary);
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-tab-button:hover {
+    --color: var(--ion-color-primary);
+    background: rgba(0, 0, 0, 0.95);
+  }
+}
+
+/* Selected tab button - Sin efectos complicados */
+ion-tab-button.tab-selected {
+  --color: var(--ion-color-primary);
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-tab-button.tab-selected {
+    --color: var(--ion-color-primary);
+  }
+}
+
+/* Tab icons - Simplificado */
+ion-tab-button ion-icon {
+  font-size: 24px;
+  margin-bottom: 2px;
+  transition: all 0.2s ease;
+}
+
+/* Selected tab icon - Simplificado */
+ion-tab-button.tab-selected ion-icon {
+  opacity: 1;
+}
+
+/* Tab labels - Simplificado */
+ion-tab-button ion-label {
+  font-size: 10px;
+  font-weight: 500;
+  margin-top: 2px;
+  transition: all 0.2s ease;
+  text-transform: none;
+}
+
+/* Selected tab label */
+ion-tab-button.tab-selected ion-label {
+  font-weight: 600;
+}
+
+/* Tab button press animation - Mínimo */
+ion-tab-button:active {
+  opacity: 0.7;
+}
+
+/* Add subtle top border separator */
+ion-tab-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 20%,
+    rgba(0, 0, 0, 0.1) 80%,
+    transparent 100%
+  );
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-tab-bar::before {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.15) 20%,
+      rgba(255, 255, 255, 0.15) 80%,
+      transparent 100%
+    );
+  }
+}
+
+/* iPhone-style safe area handling */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  ion-tab-bar {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  ion-tab-button {
+    margin: 0 2px;
+  }
+  
+  ion-tab-button.tab-selected::before {
+    width: 60px;
+    height: 38px;
+  }
+  
+  ion-tab-button ion-icon {
+    font-size: 22px;
+  }
+  
+  ion-tab-button ion-label {
+    font-size: 9px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  ion-tab-bar {
+    height: 75px;
+  }
+  
+  ion-tab-button {
+    min-height: 45px;
+  }
+  
+  ion-tab-button.tab-selected::before {
+    width: 55px;
+    height: 35px;
+  }
+  
+  ion-tab-button ion-icon {
+    font-size: 20px;
+    margin-bottom: 1px;
+  }
+  
+  ion-tab-button ion-label {
+    font-size: 8px;
+    margin-top: 1px;
+  }
+}
+
+/* Smooth transition when switching tabs */
+ion-tab-button:not(.tab-selected)::before {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  ion-tab-bar,
+  ion-tab-button,
+  ion-tab-button ion-icon,
+  ion-tab-button ion-label,
+  ion-tab-button::before {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  ion-tab-bar {
+    --background: rgba(255, 255, 255, 0.95);
+    --border: 2px solid rgba(0, 0, 0, 0.3);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    ion-tab-bar {
+      --background: rgba(0, 0, 0, 0.95);
+      --border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+/* Unified minimalist tab effects */
+.tab-button-gallery.tab-selected::before,
+.tab-button-about.tab-selected::before,
+.tab-button-contact.tab-selected::before {
+  background: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.tab-button-gallery.tab-selected,
+.tab-button-about.tab-selected,
+.tab-button-contact.tab-selected {
+  --color: var(--ion-color-primary);
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.15));
+}
+
+@media (prefers-color-scheme: dark) {
+  .tab-button-gallery.tab-selected::before,
+  .tab-button-about.tab-selected::before,
+  .tab-button-contact.tab-selected::before {
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+  }
+  
+  .tab-button-gallery.tab-selected,
+  .tab-button-about.tab-selected,
+  .tab-button-contact.tab-selected {
+    --color: var(--ion-color-secondary);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+  }
+}
+
+/* Haptic feedback simulation */
+@keyframes hapticTap {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+ion-tab-button:active {
+  animation: hapticTap 0.15s ease-out;
+}
+
+/* Subtle pulsing effect for active tab */
+@keyframes subtlePulse {
+  0%, 100% { 
+    opacity: 1; 
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% { 
+    opacity: 0.8; 
+    transform: translate(-50%, -50%) scale(1.02);
+  }
+}
+
+ion-tab-button.tab-selected::before {
+  animation: bubbleIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), 
+             subtlePulse 3s ease-in-out infinite 1s;
+}
+
+/* Dynamic shadows based on time of day */
+@media (prefers-color-scheme: light) {
+  ion-tab-bar {
+    box-shadow: 
+      0 -1px 0 rgba(0, 0, 0, 0.08),
+      0 -2px 10px rgba(0, 0, 0, 0.02),
+      0 -8px 30px rgba(0, 0, 0, 0.03);
+  }
+}
+
+/* Enhanced touch targets for mobile */
+@media (hover: none) and (pointer: coarse) {
+  ion-tab-button {
+    min-height: 55px;
+    padding: 8px 4px;
+  }
+  
+  ion-tab-button.tab-selected::before {
+    width: 70px;
+    height: 42px;
+  }
+}

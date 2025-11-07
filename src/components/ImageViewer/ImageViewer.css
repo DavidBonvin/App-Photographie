@@ -1,0 +1,318 @@
+/* Image Viewer Modal Styles */
+.image-viewer-modal {
+  --backdrop-opacity: 0;
+}
+
+.image-viewer-modal .modal-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.image-viewer-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Background blur effect */
+.background-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(40px) brightness(0.3);
+  transform: scale(1.1);
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+}
+
+/* Header controls */
+.image-viewer-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  backdrop-filter: blur(20px);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.image-viewer-header.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.image-viewer-header.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.transparent-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+}
+
+.image-title {
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.control-button {
+  --color: white;
+  --background: rgba(255, 255, 255, 0.1);
+  --background-hover: rgba(255, 255, 255, 0.2);
+  --background-activated: rgba(255, 255, 255, 0.3);
+  --border-radius: 50%;
+  margin: 0 4px;
+  width: 44px;
+  height: 44px;
+  backdrop-filter: blur(10px);
+}
+
+.close-button {
+  --background: rgba(255, 59, 48, 0.8);
+  --background-hover: rgba(255, 59, 48, 0.9);
+  --background-activated: rgba(255, 59, 48, 1);
+}
+
+.like-icon {
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.liked-icon {
+  color: #ff3b30;
+  animation: heartBeat 0.6s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.2); }
+  70% { transform: scale(1); }
+}
+
+/* Main content */
+.image-viewer-content {
+  flex: 1;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  --background: transparent;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.main-image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 20px 80px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.main-image.loaded {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.main-image:hover {
+  transform: scale(1.02);
+  box-shadow: 
+    0 15px 50px rgba(0, 0, 0, 0.5),
+    0 25px 100px rgba(0, 0, 0, 0.4);
+}
+
+/* Loading spinner */
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Bottom info panel */
+.bottom-info-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: linear-gradient(
+    to top, 
+    rgba(0, 0, 0, 0.8) 0%, 
+    rgba(0, 0, 0, 0.6) 50%, 
+    transparent 100%
+  );
+  backdrop-filter: blur(20px);
+  padding: 40px 20px 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bottom-info-panel.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.bottom-info-panel.hidden {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.info-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.category-chip {
+  --background: rgba(56, 128, 255, 0.8);
+  --color: white;
+  margin-bottom: 12px;
+}
+
+.image-detail-title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 12px 0 8px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.image-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Tap indicator */
+.tap-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 15;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  animation: fadeInOut 3s ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+  10% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  90% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-container {
+    padding: 10px;
+  }
+  
+  .image-detail-title {
+    font-size: 1.3rem;
+  }
+  
+  .image-description {
+    font-size: 0.9rem;
+  }
+  
+  .bottom-info-panel {
+    padding: 30px 15px 15px;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .image-viewer-container {
+    background: rgba(0, 0, 0, 0.98);
+  }
+  
+  .background-blur {
+    filter: blur(40px) brightness(0.2);
+  }
+}
+
+/* Smooth entrance animation */
+.image-viewer-modal.modal-entering .image-viewer-container {
+  animation: modalEnter 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.image-viewer-modal.modal-leaving .image-viewer-container {
+  animation: modalExit 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+}
+
+@keyframes modalEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalExit {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
