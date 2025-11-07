@@ -7,53 +7,56 @@ import './Gallery.css';
 const Gallery: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
+  // Base URL para imágenes en GitHub Pages
+  const baseUrl = import.meta.env.BASE_URL || '/';
+
   // Galería de fotografías reales
   const photos = [
     {
       id: 1,
-      src: '/Fotografias/P1013582.jpg',
+      src: `${baseUrl}Fotografias/P1013582.jpg`,
       title: 'Composición Natural',
       category: 'naturaleza',
       description: 'Captura de elementos naturales con enfoque artístico'
     },
     {
       id: 2,
-      src: '/Fotografias/P1026360.jpg',
+      src: `${baseUrl}Fotografias/P1026360.jpg`,
       title: 'Perspectiva Única',
       category: 'arquitectura',
       description: 'Juego de luces y sombras en espacios urbanos'
     },
     {
       id: 3,
-      src: '/Fotografias/P1026596.jpg',
+      src: `${baseUrl}Fotografias/P1026596.jpg`,
       title: 'Momento Capturado',
       category: 'street',
       description: 'Fotografía callejera con narrativa visual'
     },
     {
       id: 4,
-      src: '/Fotografias/P1026601.jpg',
+      src: `${baseUrl}Fotografias/P1026601.jpg`,
       title: 'Detalles Urbanos',
       category: 'arquitectura',
       description: 'Enfoque en texturas y formas arquitectónicas'
     },
     {
       id: 5,
-      src: '/Fotografias/P1026798.jpg',
+      src: `${baseUrl}Fotografias/P1026798.jpg`,
       title: 'Escena Cotidiana',
       category: 'street',
       description: 'La belleza en los momentos ordinarios'
     },
     {
       id: 6,
-      src: '/Fotografias/P1026932.jpg',
+      src: `${baseUrl}Fotografias/P1026932.jpg`,
       title: 'Expresión Visual',
       category: 'conceptual',
       description: 'Exploración de conceptos a través de la imagen'
     },
     {
       id: 7,
-      src: '/Fotografias/P1028134.jpg',
+      src: `${baseUrl}Fotografias/P1028134.jpg`,
       title: 'Composición Abstracta',
       category: 'conceptual',
       description: 'Interpretación artística de formas y colores'
