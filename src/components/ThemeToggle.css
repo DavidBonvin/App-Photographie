@@ -1,0 +1,67 @@
+.theme-toggle-button {
+  --background: transparent;
+  --color: var(--ion-color-primary);
+  --border-radius: var(--border-radius-lg);
+  --padding-start: var(--spacing-sm);
+  --padding-end: var(--spacing-sm);
+  --padding-top: var(--spacing-sm);
+  --padding-bottom: var(--spacing-sm);
+  --ripple-color: var(--ion-color-primary);
+  transition: all var(--transition-fast);
+  margin: 0;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.theme-toggle-button:hover {
+  --background: var(--ion-color-light);
+  transform: scale(1.05);
+}
+
+.theme-toggle-button:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle-icon {
+  font-size: 20px;
+  color: var(--ion-color-primary);
+  transition: all var(--transition-fast);
+}
+
+/* Animación suave para el cambio de icono */
+.theme-toggle-button .theme-toggle-icon {
+  animation: iconFadeIn var(--transition-fast) ease-in-out;
+}
+
+@keyframes iconFadeIn {
+  0% {
+    opacity: 0.7;
+    transform: rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+/* Mejora para accesibilidad */
+.theme-toggle-button:focus {
+  outline: 2px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .theme-toggle-button {
+    --padding-start: var(--spacing-xs);
+    --padding-end: var(--spacing-xs);
+    --padding-top: var(--spacing-xs);
+    --padding-bottom: var(--spacing-xs);
+    min-width: 40px;
+    min-height: 40px;
+  }
+  
+  .theme-toggle-icon {
+    font-size: 18px;
+  }
+}

@@ -7,13 +7,20 @@ import {
   IonTabBar,
   IonTabButton,
   IonTabs,
+  IonMenu,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import { images, person, mail } from 'ionicons/icons';
+import Gallery from './pages/Gallery';
+import About from './pages/About';
+import Contact from './pages/Contact';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -50,33 +57,61 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
+      {/* Menú lateral para móvil */}
+      <IonMenu contentId="main-content" type="overlay">
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Portafolio</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent className="menu-content">
+          <IonList className="menu-list">
+            <IonItem button routerLink="/gallery" routerDirection="none">
+              <IonIcon aria-hidden="true" icon={images} slot="start" />
+              <IonLabel>Galería</IonLabel>
+            </IonItem>
+            <IonItem button routerLink="/about" routerDirection="none">
+              <IonIcon aria-hidden="true" icon={person} slot="start" />
+              <IonLabel>Sobre mí</IonLabel>
+            </IonItem>
+            <IonItem button routerLink="/contact" routerDirection="none">
+              <IonIcon aria-hidden="true" icon={mail} slot="start" />
+              <IonLabel>Contacto</IonLabel>
+            </IonItem>
+          </IonList>
+        </IonContent>
+      </IonMenu>
+
+      {/* Contenido principal */}
       <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
+        <IonRouterOutlet id="main-content">
+          <Route exact path="/gallery">
+            <Gallery />
           </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
+          <Route exact path="/about">
+            <About />
           </Route>
-          <Route path="/tab3">
-            <Tab3 />
+          <Route path="/contact">
+            <Contact />
           </Route>
           <Route exact path="/">
-            <Redirect to="/tab1" />
+            <Redirect to="/gallery" />
           </Route>
         </IonRouterOutlet>
+        
+        {/* Tab bar simple */}
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+          <IonTabButton tab="gallery" href="/gallery">
+            <IonIcon aria-hidden="true" icon={images} />
+            <IonLabel>Galería</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+          <IonTabButton tab="about" href="/about">
+            <IonIcon aria-hidden="true" icon={person} />
+            <IonLabel>Sobre mí</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+          <IonTabButton tab="contact" href="/contact">
+            <IonIcon aria-hidden="true" icon={mail} />
+            <IonLabel>Contacto</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

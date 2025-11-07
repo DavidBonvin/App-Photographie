@@ -1,0 +1,132 @@
+.contact-hero {
+  text-align: center;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, var(--ion-color-tertiary), var(--ion-color-secondary));
+  color: white;
+  margin-bottom: 16px;
+}
+
+.contact-hero h2 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.contact-hero p {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.contact-info-card {
+  margin: 8px 0;
+  height: 100%;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.contact-icon {
+  font-size: 24px;
+  color: var(--ion-color-primary);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.contact-details h3 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  color: var(--ion-color-dark);
+}
+
+.contact-value {
+  margin: 0 0 4px;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  font-size: 16px;
+}
+
+.contact-description {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ion-color-medium);
+}
+
+.section-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.form-actions {
+  margin-top: 24px;
+}
+
+.service-card {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid var(--ion-color-light);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background: var(--ion-color-light-tint);
+}
+
+.service-card h3 {
+  margin: 0 0 12px;
+  color: var(--ion-color-dark);
+  font-size: 18px;
+}
+
+.service-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  margin-bottom: 4px;
+}
+
+.service-duration {
+  font-size: 14px;
+  color: var(--ion-color-medium);
+  margin-bottom: 12px;
+}
+
+.service-card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ion-color-dark);
+  font-style: italic;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .contact-hero {
+    padding: 24px 16px;
+  }
+  
+  .contact-hero h2 {
+    font-size: 24px;
+  }
+  
+  .contact-info-item {
+    gap: 12px;
+  }
+  
+  .service-card {
+    padding: 16px;
+  }
+}
+
+/* Mejoras para el formulario */
+ion-item {
+  margin-bottom: 8px;
+}
+
+ion-input, ion-textarea {
+  --padding-start: 0;
+}
+
+ion-label {
+  font-weight: 500;
+}
