@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://davidbonvin.github.io/App-Photographie/</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidbonvin.github.io/App-Photographie/?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidbonvin.github.io/App-Photographie/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://davidbonvin.github.io/App-Photographie/?lang=fr"/>
+  </url>
+  
+  <!-- Gallery Page -->
+  <url>
+    <loc>https://davidbonvin.github.io/App-Photographie/gallery</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidbonvin.github.io/App-Photographie/gallery?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidbonvin.github.io/App-Photographie/gallery?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://davidbonvin.github.io/App-Photographie/gallery?lang=fr"/>
+  </url>
+  
+  <!-- About Page -->
+  <url>
+    <loc>https://davidbonvin.github.io/App-Photographie/about</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidbonvin.github.io/App-Photographie/about?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidbonvin.github.io/App-Photographie/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://davidbonvin.github.io/App-Photographie/about?lang=fr"/>
+  </url>
+  
+  <!-- Contact Page -->
+  <url>
+    <loc>https://davidbonvin.github.io/App-Photographie/contact</loc>
+    <lastmod>2025-11-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://davidbonvin.github.io/App-Photographie/contact?lang=es"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://davidbonvin.github.io/App-Photographie/contact?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://davidbonvin.github.io/App-Photographie/contact?lang=fr"/>
+  </url>
+  
+</urlset>
