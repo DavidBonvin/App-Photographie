@@ -94,25 +94,25 @@ const Gallery: React.FC = () => {
           >
             <IonSegmentButton value="all" className="category-btn">
               <IonIcon icon={grid} className="category-icon" />
-              <IonLabel className="category-label">{t('gallery.categories.all') || 'Todas'}</IonLabel>
+              <IonLabel className="category-label-desktop">{t('gallery.categories.all') || 'Todas'}</IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="portraits" className="category-btn">
               <IonIcon icon={business} className="category-icon" />
-              <IonLabel className="category-label">{t('gallery.categories.portraits') || 'Retratos'}</IonLabel>
+              <IonLabel className="category-label-desktop">{t('gallery.categories.portraits') || 'Retratos'}</IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="landscapes" className="category-btn">
               <IonIcon icon={leaf} className="category-icon" />
-              <IonLabel className="category-label">{t('gallery.categories.landscapes') || 'Paisajes'}</IonLabel>
+              <IonLabel className="category-label-desktop">{t('gallery.categories.landscapes') || 'Paisajes'}</IonLabel>
             </IonSegmentButton>
             <IonSegmentButton value="street" className="category-btn">
               <IonIcon icon={walk} className="category-icon" />
-              <IonLabel className="category-label">{t('gallery.categories.street') || 'Callejera'}</IonLabel>
+              <IonLabel className="category-label-desktop">{t('gallery.categories.street') || 'Callejera'}</IonLabel>
             </IonSegmentButton>
           </IonSegment>
         </div>
 
         {/* Photo Grid */}
-        <IonGrid>
+        <IonGrid className="photo-grid">
           <IonRow>
             {currentPhotos.map((photo, index) => (
               <IonCol size="12" sizeMd="6" sizeLg="4" key={`photo-${photo.id}-${language}`}>

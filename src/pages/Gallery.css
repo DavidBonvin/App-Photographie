@@ -1,7 +1,119 @@
+/* Category Filter - Sticky and Responsive */
 .category-filter {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   padding: var(--spacing-md);
   background: var(--ion-color-secondary);
-  margin-bottom: var(--spacing-sm);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ion-color-medium);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Segment Button Styling */
+.category-segment {
+  --background: transparent;
+  width: 100%;
+  max-width: 100%;
+}
+
+.category-btn {
+  --background: transparent;
+  --background-checked: var(--ion-color-primary);
+  --color: var(--ion-color-medium);
+  --color-checked: var(--ion-color-primary-contrast);
+  --border-radius: 8px;
+  min-height: 44px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+  --color: var(--ion-color-primary);
+}
+
+/* Icon Styling */
+.category-icon {
+  font-size: 20px;
+  margin: 0;
+}
+
+/* Desktop Labels - Only visible on larger screens */
+.category-label-desktop {
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Mobile-first: Hide labels on small screens */
+@media (max-width: 768px) {
+  .category-label-desktop {
+    display: none;
+  }
+  
+  .category-btn {
+    min-height: 48px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    padding: 12px 8px;
+  }
+  
+  .category-icon {
+    font-size: 22px;
+  }
+  
+  .category-filter {
+    padding: 12px 16px;
+  }
+}
+
+/* Tablet: Small labels */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .category-btn {
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+  }
+  
+  .category-label-desktop {
+    display: block;
+    font-size: 11px;
+  }
+  
+  .category-icon {
+    font-size: 20px;
+  }
+}
+
+/* Desktop: Show labels on larger screens */
+@media (min-width: 1025px) {
+  .category-btn {
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 16px;
+  }
+  
+  .category-label-desktop {
+    display: block;
+    font-size: 12px;
+  }
+  
+  .category-icon {
+    font-size: 20px;
+  }
+}
+
+/* Photo Grid - Adjusted for sticky filter */
+.photo-grid {
+  padding-top: var(--spacing-md);
 }
 
 .photo-card {
