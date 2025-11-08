@@ -81,7 +81,7 @@ const Welcome: React.FC = () => {
         {/* Navigation Buttons */}
         <div className="welcome-navigation">
           <IonButton 
-            routerLink="/app/gallery" 
+            routerLink="/gallery" 
             fill="clear" 
             className="nav-btn gallery-btn"
             title={t('navigation.gallery') || 'Galerie'}
@@ -91,7 +91,7 @@ const Welcome: React.FC = () => {
           </IonButton>
           
           <IonButton 
-            routerLink="/app/about" 
+            routerLink="/about" 
             fill="clear" 
             className="nav-btn about-btn"
             title={t('navigation.about') || 'À propos'}
@@ -101,7 +101,7 @@ const Welcome: React.FC = () => {
           </IonButton>
           
           <IonButton 
-            routerLink="/app/contact" 
+            routerLink="/contact" 
             fill="clear" 
             className="nav-btn contact-btn"
             title={t('navigation.contact') || 'Contact'}
@@ -114,7 +114,7 @@ const Welcome: React.FC = () => {
         {/* Enter Button */}
         <div className="welcome-enter">
           <IonButton 
-            routerLink="/app/gallery" 
+            routerLink="/gallery" 
             fill="clear" 
             className="enter-btn"
           >

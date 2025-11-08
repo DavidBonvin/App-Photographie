@@ -16,6 +16,7 @@ const translations = {
     },
     navigation: {
       portfolio: "Portafolio",
+      home: "Inicio",
       gallery: "Galería",
       about: "Sobre mí",
       contact: "Contacto"
@@ -180,6 +181,7 @@ const translations = {
     },
     navigation: {
       portfolio: "Portfolio",
+      home: "Home",
       gallery: "Gallery",
       about: "About",
       contact: "Contact"
@@ -344,6 +346,7 @@ const translations = {
     },
     navigation: {
       portfolio: "Portfolio",
+      home: "Accueil",
       gallery: "Galerie",
       about: "À propos",
       contact: "Contact"

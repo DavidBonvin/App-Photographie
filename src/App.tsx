@@ -17,7 +17,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { images, person, mail } from 'ionicons/icons';
+import { images, person, mail, home } from 'ionicons/icons';
 import { useTranslation } from './i18n/useTranslation';
 import SEOHead from './components/SEOHead';
 import Welcome from './pages/Welcome';
@@ -77,15 +77,19 @@ const App: React.FC = () => {
         </IonHeader>
         <IonContent className="menu-content">
           <IonList className="menu-list">
-            <IonItem button routerLink="/app/gallery" routerDirection="none">
+            <IonItem button routerLink="/welcome" routerDirection="none">
+              <IonIcon aria-hidden="true" icon={home} slot="start" />
+              <IonLabel>{t('navigation.home') || 'Inicio'}</IonLabel>
+            </IonItem>
+            <IonItem button routerLink="/gallery" routerDirection="none">
               <IonIcon aria-hidden="true" icon={images} slot="start" />
               <IonLabel>{t('navigation.gallery')}</IonLabel>
             </IonItem>
-            <IonItem button routerLink="/app/about" routerDirection="none">
+            <IonItem button routerLink="/about" routerDirection="none">
               <IonIcon aria-hidden="true" icon={person} slot="start" />
               <IonLabel>{t('navigation.about')}</IonLabel>
             </IonItem>
-            <IonItem button routerLink="/app/contact" routerDirection="none">
+            <IonItem button routerLink="/contact" routerDirection="none">
               <IonIcon aria-hidden="true" icon={mail} slot="start" />
               <IonLabel>{t('navigation.contact')}</IonLabel>
             </IonItem>
@@ -94,53 +98,45 @@ const App: React.FC = () => {
       </IonMenu>
 
       {/* Contenido principal */}
-      <IonRouterOutlet id="main-content">
-        {/* Welcome page without tabs */}
-        <Route exact path="/welcome">
-          <Welcome />
-        </Route>
+      <IonTabs>
+        <IonRouterOutlet id="main-content">
+          <Route exact path="/welcome">
+            <Welcome />
+          </Route>
+          <Route exact path="/gallery">
+            <Gallery />
+          </Route>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/welcome" />
+          </Route>
+        </IonRouterOutlet>
         
-        {/* Main app with tabs */}
-        <Route path="/app">
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route exact path="/app/gallery">
-                <Gallery />
-              </Route>
-              <Route exact path="/app/about">
-                <About />
-              </Route>
-              <Route path="/app/contact">
-                <Contact />
-              </Route>
-              <Route exact path="/app">
-                <Redirect to="/app/gallery" />
-              </Route>
-            </IonRouterOutlet>
-            
-            {/* Tab bar simple */}
-            <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
-              <IonTabButton tab="gallery" href="/app/gallery" className="tab-button-gallery">
-                <IonIcon aria-hidden="true" icon={images} />
-                <IonLabel>{t('navigation.gallery')}</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="about" href="/app/about" className="tab-button-about">
-                <IonIcon aria-hidden="true" icon={person} />
-                <IonLabel>{t('navigation.about')}</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="contact" href="/app/contact" className="tab-button-contact">
-                <IonIcon aria-hidden="true" icon={mail} />
-                <IonLabel>{t('navigation.contact')}</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </Route>
-        
-        {/* Default redirect to welcome */}
-        <Route exact path="/">
-          <Redirect to="/welcome" />
-        </Route>
-      </IonRouterOutlet>
+        {/* Tab bar con Welcome incluido */}
+        <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
+          <IonTabButton tab="welcome" href="/welcome" className="tab-button-welcome">
+            <IonIcon aria-hidden="true" icon={home} />
+            <IonLabel>{t('navigation.home') || 'Inicio'}</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="gallery" href="/gallery" className="tab-button-gallery">
+            <IonIcon aria-hidden="true" icon={images} />
+            <IonLabel>{t('navigation.gallery')}</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="about" href="/about" className="tab-button-about">
+            <IonIcon aria-hidden="true" icon={person} />
+            <IonLabel>{t('navigation.about')}</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="contact" href="/contact" className="tab-button-contact">
+            <IonIcon aria-hidden="true" icon={mail} />
+            <IonLabel>{t('navigation.contact')}</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
     </IonReactRouter>
   </IonApp>
 );
