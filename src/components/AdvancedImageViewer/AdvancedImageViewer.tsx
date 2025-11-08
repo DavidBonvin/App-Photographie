@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { IonModal, IonButton, IonIcon, IonFab, IonFabButton, IonContent, IonHeader, IonToolbar, IonTitle } from '@ionic/react';
-import { close, informationCircle, chatbubble, heart, share, download, chevronUp, chevronDown } from 'ionicons/icons';
+import { IonModal, IonButton, IonIcon, IonContent, IonHeader, IonToolbar, IonTitle, IonSpinner } from '@ionic/react';
+import { close, informationCircle, chatbubble, heart, share, download, chevronUp, chevronDown, chevronBack, chevronForward } from 'ionicons/icons';
 import { useTranslation } from '../../i18n/useTranslation';
 import './AdvancedImageViewer.css';
 
@@ -15,9 +15,10 @@ interface PhotoMetadata {
   location?: string;
 }
 
-interface Photo {
+export interface Photo {
   id: string;
-  src: string;
+  src: string;           // Preview image for fast loading
+  srcZoom: string;       // High-res image for zoom
   title: string;
   description: string;
   artistStatement: string;
@@ -54,6 +55,8 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
   const [scale, setScale] = useState(1);
   const [translateX, setTranslateX] = useState(0);
   const [translateY, setTranslateY] = useState(0);
+  const [currentImageSrc, setCurrentImageSrc] = useState('');
+  const [isHighResLoaded, setIsHighResLoaded] = useState(false);
   
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -85,11 +88,26 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
 
   // Reset image state when photo changes
   useEffect(() => {
-    setScale(1);
-    setTranslateX(0);
-    setTranslateY(0);
-    setShowControls(true);
-  }, [currentPhotoIndex]);
+    if (currentPhoto) {
+      setScale(1);
+      setTranslateX(0);
+      setTranslateY(0);
+      setShowControls(true);
+      setCurrentImageSrc(currentPhoto.src); // Start with preview image
+      setIsHighResLoaded(false);
+      
+      // Preload high-res image in background
+      if (currentPhoto.srcZoom && currentPhoto.srcZoom !== currentPhoto.src) {
+        const highResImg = new Image();
+        highResImg.onload = () => {
+          setIsHighResLoaded(true);
+        };
+        highResImg.src = currentPhoto.srcZoom;
+      } else {
+        setIsHighResLoaded(true); // If same image, consider it loaded
+      }
+    }
+  }, [currentPhotoIndex, currentPhoto]);
 
   // Touch event handlers for zoom and pan
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -124,6 +142,20 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
         const scaleChange = distance / touchRef.current.lastDistance;
         const newScale = Math.max(0.5, Math.min(scale * scaleChange, 5));
         setScale(newScale);
+        
+        // Switch to high-res image when zooming beyond 1.5x
+        if (newScale > 1.5 && 
+            isHighResLoaded && 
+            currentPhoto?.srcZoom && 
+            currentImageSrc !== currentPhoto.srcZoom) {
+          setCurrentImageSrc(currentPhoto.srcZoom);
+        }
+        // Switch back to preview image when zooming back to normal view
+        else if (newScale <= 1.5 && 
+                 currentPhoto?.srcZoom && 
+                 currentImageSrc !== currentPhoto.src) {
+          setCurrentImageSrc(currentPhoto.src);
+        }
       }
       
       touchRef.current.lastDistance = distance;
@@ -192,6 +224,10 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
     setScale(1);
     setTranslateX(0);
     setTranslateY(0);
+    // Return to preview image when resetting
+    if (currentPhoto?.src && currentImageSrc !== currentPhoto.src) {
+      setCurrentImageSrc(currentPhoto.src);
+    }
   };
 
   const toggleLike = () => {
@@ -199,14 +235,40 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
     console.log('Toggle like for photo:', currentPhoto.id);
   };
 
-  const sharePhoto = () => {
-    // TODO: Implement share functionality
-    console.log('Share photo:', currentPhoto.id);
+  const sharePhoto = async () => {
+    try {
+      if (navigator.share) {
+        // Native Web Share API (mobile)
+        await navigator.share({
+          title: currentPhoto.title,
+          text: currentPhoto.description,
+          url: window.location.href,
+        });
+      } else {
+        // Fallback: Copy URL to clipboard
+        await navigator.clipboard.writeText(window.location.href);
+        console.log('URL copied to clipboard');
+        // TODO: Show toast notification
+      }
+    } catch (error) {
+      console.error('Error sharing photo:', error);
+    }
   };
 
   const downloadPhoto = () => {
-    // TODO: Implement download functionality
-    console.log('Download photo:', currentPhoto.id);
+    try {
+      // Use the high-res image if available, otherwise use regular src
+      const imageUrl = currentPhoto.srcZoom || currentPhoto.src;
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      link.download = `${currentPhoto.title.replace(/\s+/g, '_')}.jpg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      console.log('Downloaded photo:', currentPhoto.title);
+    } catch (error) {
+      console.error('Error downloading photo:', error);
+    }
   };
 
   if (!currentPhoto) return null;
@@ -229,7 +291,7 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
         >
           <img
             ref={imageRef}
-            src={currentPhoto.src}
+            src={currentImageSrc}
             alt={currentPhoto.title}
             className="main-image"
             style={{
@@ -238,6 +300,14 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
             }}
             onDoubleClick={resetImagePosition}
           />
+          
+          {/* High-res loading indicator */}
+          {!isHighResLoaded && currentPhoto?.srcZoom && currentPhoto.srcZoom !== currentPhoto.src && (
+            <div className="loading-indicator">
+              <IonSpinner name="crescent" />
+              <p>{t('loadingHighRes')}</p>
+            </div>
+          )}
         </div>
 
         {/* Album Navigation Indicators */}
@@ -256,42 +326,51 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
 
         {/* Controls Overlay */}
         <div className={`controls-overlay ${showControls ? 'visible' : ''}`}>
-          {/* Close Button */}
-          <IonFab vertical="top" horizontal="end" slot="fixed">
-            <IonFabButton color="dark" onClick={onClose}>
+          {/* Top Button Bar - Left Side */}
+          <div className="top-button-bar-left">
+            <button className="control-btn" onClick={onClose} title="Cerrar">
               <IonIcon icon={close} />
-            </IonFabButton>
-          </IonFab>
-
-          {/* Action Buttons */}
-          <div className="action-buttons">
-            <IonFab vertical="bottom" horizontal="start" slot="fixed">
-              <IonFabButton color="dark" onClick={() => setShowDetails(true)}>
-                <IonIcon icon={informationCircle} />
-              </IonFabButton>
-            </IonFab>
-
-            <IonFab vertical="bottom" horizontal="center" slot="fixed">
-              <IonFabButton color="dark" onClick={() => setShowComments(true)}>
-                <IonIcon icon={chatbubble} />
-              </IonFabButton>
-            </IonFab>
-
-            <IonFab vertical="bottom" horizontal="end" slot="fixed">
-              <IonFabButton color="dark" onClick={toggleLike}>
-                <IonIcon icon={heart} />
-              </IonFabButton>
-            </IonFab>
+            </button>
+            <button className="control-btn" onClick={sharePhoto} title="Compartir">
+              <IonIcon icon={share} />
+            </button>
+            <button className="control-btn" onClick={downloadPhoto} title="Descargar">
+              <IonIcon icon={download} />
+            </button>
           </div>
 
-          {/* Secondary Actions */}
-          <div className="secondary-actions">
-            <IonButton fill="clear" color="light" onClick={sharePhoto}>
-              <IonIcon icon={share} slot="icon-only" />
-            </IonButton>
-            <IonButton fill="clear" color="light" onClick={downloadPhoto}>
-              <IonIcon icon={download} slot="icon-only" />
-            </IonButton>
+          {/* Navigation Arrows */}
+          <div className="navigation-arrows">
+            <button 
+              className="nav-btn nav-btn-left"
+              onClick={() => currentPhotoIndex > 0 && onPhotoChange(currentPhotoIndex - 1)}
+              disabled={currentPhotoIndex === 0}
+              title="Foto anterior"
+            >
+              <IonIcon icon={chevronBack} />
+            </button>
+            
+            <button 
+              className="nav-btn nav-btn-right"
+              onClick={() => currentPhotoIndex < photos.length - 1 && onPhotoChange(currentPhotoIndex + 1)}
+              disabled={currentPhotoIndex === photos.length - 1}
+              title="Foto siguiente"
+            >
+              <IonIcon icon={chevronForward} />
+            </button>
+          </div>
+
+          {/* Bottom Action Buttons - Compacted */}
+          <div className="bottom-action-bar">
+            <button className="action-btn" onClick={() => setShowDetails(true)} title="Detalles">
+              <IonIcon icon={informationCircle} />
+            </button>
+            <button className="action-btn" onClick={() => setShowComments(true)} title="Comentarios">
+              <IonIcon icon={chatbubble} />
+            </button>
+            <button className="action-btn" onClick={toggleLike} title="Me gusta">
+              <IonIcon icon={heart} />
+            </button>
           </div>
         </div>
 

@@ -156,6 +156,7 @@
     "swipeVertical": "Glissez verticalement pour changer d'album",
     "tapToToggle": "Touchez pour afficher/masquer les contrôles",
     "pinchToZoom": "Pincez pour zoomer",
-    "artistStatement": "Déclaration d'Artiste"
+    "artistStatement": "Déclaration d'Artiste",
+    "loadingHighRes": "Chargement HD..."
   }
 }

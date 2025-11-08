@@ -12,7 +12,8 @@ export interface PhotoMetadata {
 
 export interface Photo {
   id: string;
-  src: string;
+  src: string;           // Preview image for fast loading
+  srcZoom: string;       // High-res image for zoom
   title: string;
   description: string;
   artistStatement: string;
@@ -29,134 +30,145 @@ export interface Album {
   photos: Photo[];
 }
 
-// Sample photography data with professional metadata
+// Helper function to get base URL
+const getBaseUrl = () => {
+  return import.meta.env.DEV ? '/' : import.meta.env.BASE_URL;
+};
+
+// Sample photography data with real photos and professional metadata
 export const photographyData: Album[] = [
   {
-    id: 'portraits',
-    name: 'Retratos',
-    description: 'Explorando la esencia humana a través del lente',
-    coverPhoto: 'https://picsum.photos/800/1200?random=1',
+    id: 'naturaleza',
+    name: 'Naturaleza',
+    description: 'Explorando la belleza natural a través del lente',
+    coverPhoto: `${getBaseUrl()}Fotografias/P1013582.jpg`,
     photos: [
       {
-        id: 'portrait-1',
-        src: 'https://picsum.photos/800/1200?random=1',
-        title: 'Susurros del Alma',
-        description: 'La mirada que habla sin palabras',
-        artistStatement: 'En esta obra busco capturar ese momento íntimo donde el alma se asoma a través de los ojos. Cada línea, cada sombra cuenta una historia de vulnerabilidad y fortaleza que coexisten en la naturaleza humana. Como las grandes obras del Louvre, esta fotografía invita al espectador a un diálogo silencioso con el sujeto.',
+        id: 'nature-1',
+        src: `${getBaseUrl()}Fotografias/P1013582.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1013582.jpg`, // Por ahora la misma, luego optimizaremos
+        title: 'Composición Natural',
+        description: 'Captura de elementos naturales con enfoque artístico',
+        artistStatement: 'En esta obra busco capturar la esencia de la naturaleza en su estado más puro. Cada elemento en la composición habla de la armonía natural que existe cuando el humano observa sin interferir. La luz natural se convierte en pincel, creando una sinfonía visual que invita a la contemplación.',
         metadata: {
-          camera: 'Canon EOS R5',
-          lens: '85mm f/1.4L',
-          aperture: 'f/2.8',
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/5.6',
           shutterSpeed: '1/125s',
-          iso: '400',
-          focalLength: '85mm',
+          iso: '200',
+          focalLength: '25mm',
           date: '15 de octubre, 2024',
-          location: 'París, Francia'
+          location: 'Parque Natural'
         },
-        album: 'portraits',
+        album: 'naturaleza',
         albumIndex: 0
       },
       {
-        id: 'portrait-2',
-        src: 'https://picsum.photos/800/1200?random=2',
-        title: 'Melancolía Urbana',
-        description: 'Soledad en medio de la multitud',
-        artistStatement: 'Esta pieza reflexiona sobre el aislamiento en la era moderna. El sujeto, rodeado de la geometría urbana, representa la paradoja de estar conectados pero solos. La composición utiliza las líneas arquitectónicas para crear un marco natural que enfatiza la fragilidad humana ante la inmensidad de la ciudad.',
+        id: 'nature-2',
+        src: `${getBaseUrl()}Fotografias/P1027713.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1027713.jpg`,
+        title: 'Serenidad Natural',
+        description: 'Momentos de calma en el entorno natural',
+        artistStatement: 'La serenidad se encuentra en los detalles más simples de la naturaleza. Esta imagen captura ese momento de pausa donde el tiempo parece detenerse, invitando al espectador a encontrar su propio espacio de tranquilidad interior.',
         metadata: {
-          camera: 'Canon EOS R5',
-          lens: '50mm f/1.2L',
-          aperture: 'f/2.0',
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/4.0',
           shutterSpeed: '1/60s',
-          iso: '800',
-          focalLength: '50mm',
-          date: '22 de septiembre, 2024',
-          location: 'Londres, Reino Unido'
+          iso: '100',
+          focalLength: '35mm',
+          date: '20 de octubre, 2024',
+          location: 'Sendero Natural'
         },
-        album: 'portraits',
+        album: 'naturaleza',
         albumIndex: 1
       },
       {
-        id: 'portrait-3',
-        src: 'https://picsum.photos/800/1200?random=3',
-        title: 'Ecos de Juventud',
-        description: 'La inocencia en transición',
-        artistStatement: 'Capturado en el umbral entre la infancia y la adolescencia, este retrato documenta ese momento efímero donde la inocencia se encuentra con la comprensión del mundo. La luz suave simboliza la pureza, mientras las sombras sugieren los misterios por descubrir.',
+        id: 'nature-3',
+        src: `${getBaseUrl()}Fotografias/P1028032.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1028032.jpg`,
+        title: 'Texturas Orgánicas',
+        description: 'Explorando las texturas naturales',
+        artistStatement: 'Las texturas naturales cuentan historias milenarias. Cada línea, cada forma es el resultado de procesos que trascienden nuestra comprensión temporal. En esta obra, la cámara se convierte en arqueólogo visual, documentando la historia escrita por la naturaleza.',
         metadata: {
-          camera: 'Sony α7R IV',
-          lens: '135mm f/1.8',
-          aperture: 'f/2.8',
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/8.0',
           shutterSpeed: '1/200s',
-          iso: '200',
-          focalLength: '135mm',
-          date: '8 de noviembre, 2024',
-          location: 'Barcelona, España'
+          iso: '400',
+          focalLength: '42mm',
+          date: '25 de octubre, 2024',
+          location: 'Bosque Nacional'
         },
-        album: 'portraits',
+        album: 'naturaleza',
         albumIndex: 2
       }
     ]
   },
   {
-    id: 'landscapes',
-    name: 'Paisajes',
-    description: 'La naturaleza como lienzo de emociones',
-    coverPhoto: 'https://picsum.photos/1200/800?random=10',
+    id: 'arquitectura',
+    name: 'Arquitectura',
+    description: 'Geometrías urbanas y espacios construidos',
+    coverPhoto: `${getBaseUrl()}Fotografias/P1026360.jpg`,
     photos: [
       {
-        id: 'landscape-1',
-        src: 'https://picsum.photos/1200/800?random=10',
-        title: 'Sinfonía del Amanecer',
-        description: 'Cuando la luz abraza la montaña',
-        artistStatement: 'Esta obra captura el momento sagrado donde la noche cede ante el día. La montaña, silenciosa testigo del tiempo, se viste de oro mientras las nubes danzan en una coreografía etérea. Es una meditación sobre la permanencia y el cambio, temas eternos que resuenan desde los paisajes de Turner hasta nuestros días.',
+        id: 'arch-1',
+        src: `${getBaseUrl()}Fotografias/P1026360.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1026360.jpg`,
+        title: 'Perspectiva Única',
+        description: 'Juego de luces y sombras en espacios urbanos',
+        artistStatement: 'La arquitectura moderna crea nuevos lenguajes visuales donde la luz y la sombra dialogan en perfecta armonía. Esta perspectiva revela cómo los espacios construidos pueden generar emociones tan profundas como las que encontramos en la naturaleza.',
         metadata: {
-          camera: 'Sony α7R IV',
-          lens: '24-70mm f/2.8',
-          aperture: 'f/8.0',
-          shutterSpeed: '1/30s',
-          iso: '100',
-          focalLength: '35mm',
-          date: '5 de octubre, 2024',
-          location: 'Alpes Suizos'
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/11',
+          shutterSpeed: '1/250s',
+          iso: '200',
+          focalLength: '14mm',
+          date: '12 de octubre, 2024',
+          location: 'Centro Urbano'
         },
-        album: 'landscapes',
+        album: 'arquitectura',
         albumIndex: 0
       },
       {
-        id: 'landscape-2',
-        src: 'https://picsum.photos/1200/800?random=11',
-        title: 'Espejo de Nubes',
-        description: 'Reflexiones de infinito',
-        artistStatement: 'El lago actúa como portal entre dos mundos: el tangible y el reflejado. Esta dualidad invita a cuestionar qué es real y qué es ilusión. La composición simétrica busca esa perfección matemática que los maestros renacentistas perseguían, encontrando en la naturaleza la geometría divina.',
+        id: 'arch-2',
+        src: `${getBaseUrl()}Fotografias/P1026601.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1026601.jpg`,
+        title: 'Detalles Urbanos',
+        description: 'Enfoque en texturas y formas arquitectónicas',
+        artistStatement: 'Los detalles arquitectónicos revelan la intención del creador. Cada línea, cada ángulo es una decisión consciente que busca comunicar algo específico. Mi lente se detiene en estos detalles para descifrar el mensaje oculto en la construcción.',
         metadata: {
-          camera: 'Canon EOS R6',
-          lens: '16-35mm f/2.8L',
-          aperture: 'f/11',
-          shutterSpeed: '2s',
-          iso: '50',
-          focalLength: '24mm',
-          date: '18 de septiembre, 2024',
-          location: 'Lago Bled, Eslovenia'
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/5.6',
+          shutterSpeed: '1/125s',
+          iso: '320',
+          focalLength: '28mm',
+          date: '14 de octubre, 2024',
+          location: 'Distrito Histórico'
         },
-        album: 'landscapes',
+        album: 'arquitectura',
         albumIndex: 1
       },
       {
-        id: 'landscape-3',
-        src: 'https://picsum.photos/1200/800?random=12',
-        title: 'Catedral de Hielo',
-        description: 'Arquitectura natural en estado puro',
-        artistStatement: 'La naturaleza como arquitecta suprema crea estas catedrales de hielo que rivalizan con las más grandiosas construcciones humanas. Cada formación es única, efímera, preciosa. Esta imagen documenta un momento irrepetible en el tiempo geológico, una escultura temporal que solo los ojos privilegiados pueden contemplar.',
+        id: 'arch-3',
+        src: `${getBaseUrl()}Fotografias/P1028017.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1028017.jpg`,
+        title: 'Geometría Moderna',
+        description: 'Formas contemporáneas en el paisaje urbano',
+        artistStatement: 'La geometría moderna desafía nuestra percepción tradicional del espacio. Estas formas contemporáneas no solo cumplen una función práctica, sino que redefinen nuestra relación con el entorno construido, creando nuevas formas de habitar y percibir.',
         metadata: {
-          camera: 'Nikon Z9',
-          lens: '14-24mm f/2.8',
-          aperture: 'f/5.6',
-          shutterSpeed: '1/250s',
-          iso: '400',
-          focalLength: '18mm',
-          date: '2 de enero, 2024',
-          location: 'Islandia'
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/8.0',
+          shutterSpeed: '1/160s',
+          iso: '250',
+          focalLength: '35mm',
+          date: '18 de octubre, 2024',
+          location: 'Zona Comercial'
         },
-        album: 'landscapes',
+        album: 'arquitectura',
         albumIndex: 2
       }
     ]
@@ -164,65 +176,116 @@ export const photographyData: Album[] = [
   {
     id: 'street',
     name: 'Fotografía Callejera',
-    description: 'Historias urbanas en movimiento',
-    coverPhoto: 'https://picsum.photos/800/600?random=20',
+    description: 'Historias urbanas y momentos capturados',
+    coverPhoto: `${getBaseUrl()}Fotografias/P1026596.jpg`,
     photos: [
       {
         id: 'street-1',
-        src: 'https://picsum.photos/800/600?random=20',
-        title: 'Prisa y Pausa',
-        description: 'El ritmo de la ciudad moderna',
-        artistStatement: 'En esta escena urbana se confrontan dos velocidades: la del mundo acelerado y la de la contemplación humana. El contraste entre el movimiento difuso de los transeúntes y la figura estática del protagonista nos habla de la resistencia individual ante el ritmo impuesto por la modernidad.',
+        src: `${getBaseUrl()}Fotografias/P1026596.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1026596.jpg`,
+        title: 'Momento Capturado',
+        description: 'Fotografía callejera con narrativa visual',
+        artistStatement: 'La fotografía callejera es el arte de capturar la vida tal como sucede. Este momento, irrepetible y auténtico, nos habla de la condición humana en su expresión más pura. La calle se convierte en escenario donde cada persona escribe su propia historia.',
         metadata: {
-          camera: 'Leica Q2',
-          lens: '28mm f/1.7',
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
           aperture: 'f/4.0',
-          shutterSpeed: '1/15s',
-          iso: '1600',
-          focalLength: '28mm',
-          date: '14 de noviembre, 2024',
-          location: 'Nueva York, EE.UU.'
+          shutterSpeed: '1/60s',
+          iso: '800',
+          focalLength: '42mm',
+          date: '10 de octubre, 2024',
+          location: 'Calle Peatonal'
         },
         album: 'street',
         albumIndex: 0
       },
       {
         id: 'street-2',
-        src: 'https://picsum.photos/800/600?random=21',
-        title: 'Geometrías Humanas',
-        description: 'Cuando la arquitectura abraza la vida',
-        artistStatement: 'Las líneas arquitectónicas se convierten en marco narrativo de la experiencia humana. Esta composición explora cómo el espacio urbano influye en nuestros movimientos y comportamientos, creando patrones geométricos inconscientes que revelan la danza secreta entre humanidad y ciudad.',
+        src: `${getBaseUrl()}Fotografias/P1026798.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1026798.jpg`,
+        title: 'Escena Cotidiana',
+        description: 'La belleza en los momentos ordinarios',
+        artistStatement: 'En lo cotidiano se esconde la verdadera poesía de la vida urbana. Esta escena ordinaria se transforma en extraordinaria cuando la observamos con la mirada del artista, revelando la belleza que existe en los momentos más simples de nuestro día a día.',
         metadata: {
-          camera: 'Fujifilm X-T5',
-          lens: '23mm f/2',
-          aperture: 'f/5.6',
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/2.8',
           shutterSpeed: '1/125s',
-          iso: '800',
-          focalLength: '23mm',
-          date: '7 de octubre, 2024',
-          location: 'Tokio, Japón'
+          iso: '640',
+          focalLength: '25mm',
+          date: '16 de octubre, 2024',
+          location: 'Plaza Central'
         },
         album: 'street',
         albumIndex: 1
       },
       {
         id: 'street-3',
-        src: 'https://picsum.photos/800/600?random=22',
-        title: 'Sombras de Memoria',
-        description: 'El pasado que camina entre nosotros',
-        artistStatement: 'Las sombras proyectadas en el pavimento crean una segunda realidad, un mundo paralelo donde la memoria y el presente se encuentran. Esta imagen captura ese momento donde lo efímero se vuelve eterno, donde una simple silueta cuenta la historia completa de una vida en movimiento.',
+        src: `${getBaseUrl()}Fotografias/PSX_20251104_224647.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/PSX_20251104_224647.jpg`,
+        title: 'Composición Urbana',
+        description: 'Elementos urbanos en armonía visual',
+        artistStatement: 'La ciudad es un lienzo en constante transformación. Esta composición urbana captura la armonía visual que emerge del aparente caos citadino, donde cada elemento encuentra su lugar en una sinfonía visual contemporánea.',
         metadata: {
-          camera: 'Canon EOS R6',
-          lens: '35mm f/1.4L',
-          aperture: 'f/8.0',
-          shutterSpeed: '1/60s',
-          iso: '400',
-          focalLength: '35mm',
-          date: '25 de agosto, 2024',
-          location: 'Roma, Italia'
+          camera: 'Smartphone',
+          lens: 'Lente Principal',
+          aperture: 'f/1.8',
+          shutterSpeed: '1/100s',
+          iso: '320',
+          focalLength: '26mm equiv.',
+          date: '4 de noviembre, 2024',
+          location: 'Área Urbana'
         },
         album: 'street',
         albumIndex: 2
+      }
+    ]
+  },
+  {
+    id: 'conceptual',
+    name: 'Conceptual',
+    description: 'Exploración artística y conceptos visuales',
+    coverPhoto: `${getBaseUrl()}Fotografias/P1026932.jpg`,
+    photos: [
+      {
+        id: 'concept-1',
+        src: `${getBaseUrl()}Fotografias/P1026932.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1026932.jpg`,
+        title: 'Expresión Visual',
+        description: 'Exploración de conceptos a través de la imagen',
+        artistStatement: 'El arte conceptual trasciende la representación literal para adentrarse en el reino de las ideas. Esta obra explora conceptos abstractos a través del lenguaje visual, invitando al espectador a participar activamente en la construcción del significado.',
+        metadata: {
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/2.8',
+          shutterSpeed: '1/80s',
+          iso: '400',
+          focalLength: '20mm',
+          date: '22 de octubre, 2024',
+          location: 'Estudio'
+        },
+        album: 'conceptual',
+        albumIndex: 0
+      },
+      {
+        id: 'concept-2',
+        src: `${getBaseUrl()}Fotografias/P1028134.jpg`,
+        srcZoom: `${getBaseUrl()}Fotografias/P1028134.jpg`,
+        title: 'Composición Abstracta',
+        description: 'Interpretación artística de formas y colores',
+        artistStatement: 'La abstracción libera a la fotografía de sus ataduras representativas. En esta composición, las formas y colores dialogan en un lenguaje puro, creando significados que emergen desde la percepción individual de cada observador.',
+        metadata: {
+          camera: 'Panasonic Lumix',
+          lens: 'Lumix G Vario 14-42mm',
+          aperture: 'f/5.6',
+          shutterSpeed: '1/200s',
+          iso: '100',
+          focalLength: '30mm',
+          date: '28 de octubre, 2024',
+          location: 'Espacio Creativo'
+        },
+        album: 'conceptual',
+        albumIndex: 1
       }
     ]
   }
