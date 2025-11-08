@@ -8,6 +8,12 @@ const translations = {
     app: {
       title: "Mi Portafolio"
     },
+    welcome: {
+      title: "Portafolio Fotográfico",
+      subtitle: "Descubre un mundo cautivado por la belleza",
+      tagline: "Arte • Pasión • Visión",
+      enter: "Entrar"
+    },
     navigation: {
       portfolio: "Portafolio",
       gallery: "Galería",
@@ -166,6 +172,12 @@ const translations = {
     app: {
       title: "My Portfolio"
     },
+    welcome: {
+      title: "Photography Portfolio",
+      subtitle: "Discover a world captivated by beauty",
+      tagline: "Art • Passion • Vision",
+      enter: "Enter"
+    },
     navigation: {
       portfolio: "Portfolio",
       gallery: "Gallery",
@@ -323,6 +335,12 @@ const translations = {
   fr: {
     app: {
       title: "Mon Portfolio"
+    },
+    welcome: {
+      title: "Portfolio Photographique",
+      subtitle: "Découvrez un monde captivé par la beauté",
+      tagline: "Art • Passion • Vision",
+      enter: "Entrer"
     },
     navigation: {
       portfolio: "Portfolio",
@@ -499,7 +517,7 @@ interface TranslationProviderProps {
 export const TranslationProvider: React.FC<TranslationProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<Language>(() => {
     const saved = localStorage.getItem('portfolio-language');
-    return (saved as Language) || 'es';
+    return (saved as Language) || 'fr';
   });
 
   useEffect(() => {

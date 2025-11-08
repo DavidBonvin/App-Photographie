@@ -2,6 +2,12 @@
   "app": {
     "title": "Mi Portafolio"
   },
+  "welcome": {
+    "title": "Portafolio Fotográfico",
+    "subtitle": "Descubre un mundo cautivado por la belleza",
+    "tagline": "Arte • Pasión • Visión",
+    "enter": "Entrar"
+  },
   "navigation": {
     "gallery": "Galería",
     "about": "Sobre mí",

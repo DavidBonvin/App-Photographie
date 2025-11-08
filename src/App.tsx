@@ -20,6 +20,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { images, person, mail } from 'ionicons/icons';
 import { useTranslation } from './i18n/useTranslation';
 import SEOHead from './components/SEOHead';
+import Welcome from './pages/Welcome';
 import Gallery from './pages/Gallery';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -95,6 +96,9 @@ const App: React.FC = () => {
       {/* Contenido principal */}
       <IonTabs>
         <IonRouterOutlet id="main-content">
+          <Route exact path="/welcome">
+            <Welcome />
+          </Route>
           <Route exact path="/gallery">
             <Gallery />
           </Route>
@@ -105,7 +109,7 @@ const App: React.FC = () => {
             <Contact />
           </Route>
           <Route exact path="/">
-            <Redirect to="/gallery" />
+            <Redirect to="/welcome" />
           </Route>
         </IonRouterOutlet>
         

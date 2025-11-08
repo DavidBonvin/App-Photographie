@@ -285,6 +285,7 @@
   
   .category-segment {
     padding: var(--spacing-xs) 2px;
+    justify-items: center;
   }
   
   .category-btn {
