@@ -1,0 +1,381 @@
+/* Advanced Image Viewer Styles */
+
+.advanced-image-viewer {
+  --background: rgba(0, 0, 0, 0.95);
+}
+
+.image-viewer-content {
+  --background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Main Image Container */
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.95);
+  touch-action: none;
+  user-select: none;
+}
+
+.main-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform-origin: center;
+  cursor: grab;
+}
+
+.main-image:active {
+  cursor: grabbing;
+}
+
+/* Album Navigation Indicators */
+.album-indicators {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.album-indicators.visible {
+  opacity: 1;
+}
+
+.album-info {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.album-nav-icon {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+/* Photo Counter */
+.photo-counter {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-counter.visible {
+  opacity: 1;
+}
+
+/* Controls Overlay */
+.controls-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.controls-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Action Buttons */
+.action-buttons {
+  position: relative;
+  height: 100%;
+}
+
+.action-buttons ion-fab {
+  pointer-events: auto;
+}
+
+.action-buttons ion-fab-button {
+  --background: rgba(0, 0, 0, 0.8);
+  --background-activated: rgba(0, 0, 0, 0.9);
+  --color: white;
+  --border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 56px;
+  height: 56px;
+}
+
+/* Secondary Actions */
+.secondary-actions {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+
+.secondary-actions ion-button {
+  --background: rgba(0, 0, 0, 0.7);
+  --color: white;
+  --border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 40px;
+  height: 40px;
+}
+
+/* Photo Info Bar */
+.photo-info-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  padding: 40px 20px 20px;
+  color: white;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.photo-info-bar.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo-info-bar h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  color: white;
+}
+
+.photo-info-bar p {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+/* Photo Details Modal */
+.photo-details-content {
+  --background: var(--ion-color-secondary);
+  --color: var(--ion-color-primary);
+}
+
+.details-section {
+  padding: 20px;
+}
+
+.details-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: var(--ion-color-primary);
+}
+
+.artist-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  line-height: 1.6;
+  font-style: italic;
+  margin: 0 0 32px 0;
+  color: var(--ion-color-primary);
+  padding: 20px;
+  background: rgba(var(--ion-color-tertiary-rgb), 0.1);
+  border-radius: 12px;
+  border-left: 4px solid var(--ion-color-tertiary);
+}
+
+.technical-details h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: var(--ion-color-primary);
+}
+
+.metadata-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.metadata-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(var(--ion-color-tertiary-rgb), 0.2);
+}
+
+.metadata-item:last-child {
+  border-bottom: none;
+}
+
+.metadata-item .label {
+  font-weight: 500;
+  color: var(--ion-color-tertiary);
+  font-size: 14px;
+}
+
+.metadata-item .value {
+  font-weight: 600;
+  color: var(--ion-color-primary);
+  font-size: 14px;
+}
+
+/* Comments Modal */
+.comments-content {
+  --background: var(--ion-color-secondary);
+  --color: var(--ion-color-primary);
+}
+
+.comments-placeholder {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.comments-placeholder p {
+  font-size: 16px;
+  color: var(--ion-color-tertiary);
+  margin: 0;
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+  .advanced-image-viewer {
+    --background: rgba(18, 18, 18, 0.98);
+  }
+  
+  .image-container {
+    background: rgba(18, 18, 18, 0.98);
+  }
+  
+  .album-info {
+    background: rgba(18, 18, 18, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .photo-counter {
+    background: rgba(18, 18, 18, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .secondary-actions ion-button {
+    --background: rgba(18, 18, 18, 0.9);
+  }
+  
+  .photo-info-bar {
+    background: linear-gradient(transparent, rgba(18, 18, 18, 0.9));
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .action-buttons ion-fab-button {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .secondary-actions ion-button {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .photo-info-bar {
+    padding: 20px 16px 16px;
+  }
+  
+  .photo-info-bar h3 {
+    font-size: 16px;
+  }
+  
+  .photo-info-bar p {
+    font-size: 13px;
+  }
+  
+  .details-section {
+    padding: 16px;
+  }
+  
+  .details-section h2 {
+    font-size: 24px;
+  }
+  
+  .artist-statement {
+    font-size: 16px;
+    padding: 16px;
+  }
+}
+
+/* Loading and Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.main-image {
+  animation: fadeInScale 0.3s ease-out;
+}
+
+/* Touch feedback */
+.action-buttons ion-fab-button:active {
+  transform: scale(0.95);
+}
+
+.secondary-actions ion-button:active {
+  transform: scale(0.95);
+}
+
+/* Swipe indicators */
+.swipe-hint {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  text-align: center;
+  z-index: 50;
+  opacity: 0;
+  animation: pulseHint 2s infinite;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.6; }
+}

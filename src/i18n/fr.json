@@ -11,10 +11,9 @@
     "title": "Mon Portfolio",
     "categories": {
       "all": "Toutes",
-      "nature": "Nature",
-      "architecture": "Architecture",
-      "street": "Street",
-      "conceptual": "Conceptuel"
+      "portraits": "Portraits",
+      "landscapes": "Paysages",
+      "street": "Photographie de Rue"
     },
     "photos": {
       "naturalComposition": {
@@ -140,5 +139,23 @@
         "description": "Photographie de produit et d'entreprise"
       }
     }
+  },
+  "viewer": {
+    "photoDetails": "Détails de la Photo",
+    "comments": "Commentaires",
+    "commentsComingSoon": "Système de commentaires bientôt disponible",
+    "technicalDetails": "Détails Techniques",
+    "camera": "Appareil Photo",
+    "lens": "Objectif",
+    "aperture": "Ouverture",
+    "shutterSpeed": "Vitesse d'Obturation",
+    "focalLength": "Distance Focale",
+    "date": "Date",
+    "location": "Lieu",
+    "swipeHorizontal": "Glissez horizontalement pour changer de photo",
+    "swipeVertical": "Glissez verticalement pour changer d'album",
+    "tapToToggle": "Touchez pour afficher/masquer les contrôles",
+    "pinchToZoom": "Pincez pour zoomer",
+    "artistStatement": "Déclaration d'Artiste"
   }
 }

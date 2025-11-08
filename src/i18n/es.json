@@ -11,10 +11,9 @@
     "title": "Mi Portafolio",
     "categories": {
       "all": "Todas",
-      "nature": "Naturaleza",
-      "architecture": "Arquitectura",
-      "street": "Street",
-      "conceptual": "Conceptual"
+      "portraits": "Retratos",
+      "landscapes": "Paisajes",
+      "street": "Fotografía Callejera"
     },
     "photos": {
       "naturalComposition": {
@@ -140,5 +139,23 @@
         "description": "Fotografía de producto y empresarial"
       }
     }
+  },
+  "viewer": {
+    "photoDetails": "Detalles de la Fotografía",
+    "comments": "Comentarios",
+    "commentsComingSoon": "Sistema de comentarios próximamente",
+    "technicalDetails": "Detalles Técnicos",
+    "camera": "Cámara",
+    "lens": "Lente",
+    "aperture": "Apertura",
+    "shutterSpeed": "Velocidad de Obturación",
+    "focalLength": "Distancia Focal",
+    "date": "Fecha",
+    "location": "Ubicación",
+    "swipeHorizontal": "Desliza horizontalmente para cambiar foto",
+    "swipeVertical": "Desliza verticalmente para cambiar álbum",
+    "tapToToggle": "Toca para mostrar/ocultar controles",
+    "pinchToZoom": "Pellizca para hacer zoom",
+    "artistStatement": "Declaración Artística"
   }
 }
