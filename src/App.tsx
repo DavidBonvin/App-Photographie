@@ -139,11 +139,6 @@ const App: React.FC = () => {
             </IonTabBar>
           </IonTabs>
         </Route>
-        
-        {/* Default redirect to welcome */}
-        <Route exact path="/">
-          <Redirect to="/welcome" />
-        </Route>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
