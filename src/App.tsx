@@ -21,7 +21,7 @@ import { IonReactRouter } from '@ionic/react-router';
 import { images, person, mail, home } from 'ionicons/icons';
 import { useTranslation } from './i18n/useTranslation';
 import SEOHead from './components/SEOHead';
-import Welcome from './pages/Welcome';
+// import Welcome from './pages/Welcome';
 import TestWelcome from './pages/TestWelcome';
 import Gallery from './pages/Gallery';
 import About from './pages/About';
@@ -79,11 +79,43 @@ const App: React.FC = () => {
   console.log('📍 Relative pathname (without basename):', window.location.pathname.replace(basename, ''));
   console.log('🎭 IonRouterOutlet will render with basename:', basename);
   
-  // Add effect to log route changes
+  // Add effect to log route changes (MUST be before any early returns)
   React.useEffect(() => {
     console.log('🎭 App useEffect - pathname changed:', window.location.pathname);
     console.log('🎭 App useEffect - relative path:', window.location.pathname.replace(basename, ''));
   }, [basename]);
+  
+  // Force immediate test - bypass routing for now
+  const isTestMode = window.location.pathname.includes('/welcome');
+  console.log('🔥 FORCE TEST MODE:', isTestMode);
+  
+  if (isTestMode) {
+    console.log('🔥 RETURNING TEST COMPONENT DIRECTLY!');
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'lime',
+        color: 'black',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '30px',
+        fontWeight: 'bold',
+        zIndex: 999999
+      }}>
+        <div style={{ textAlign: 'center', backgroundColor: 'white', padding: '30px', border: '5px solid black' }}>
+          <h1>🔥 DIRECT TEST SUCCESS!</h1>
+          <p>URL: {window.location.href}</p>
+          <p>Path: {window.location.pathname}</p>
+          <p>This bypasses all routing!</p>
+        </div>
+      </div>
+    );
+  }
   
   return (
   <IonApp>
