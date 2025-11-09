@@ -79,8 +79,8 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
           text: imageDescription,
           url: window.location.href
         });
-      } catch (error) {
-        console.log('Error sharing:', error);
+      } catch {
+        // Error sharing - silently fail
       }
     } else {
       // Fallback: copy URL to clipboard

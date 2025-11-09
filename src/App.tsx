@@ -118,6 +118,9 @@ const App: React.FC = () => {
           return (
             <IonTabs>
               <IonRouterOutlet>
+                <Route exact path="/app/welcome" render={() => {
+                  return <Welcome />;
+                }} />
                 <Route exact path="/app/gallery" render={() => {
                   return <Gallery />;
                 }} />
@@ -128,12 +131,16 @@ const App: React.FC = () => {
                   return <Contact />;
                 }} />
                 <Route exact path="/app" render={() => {
-                  return <Redirect to="/app/gallery" />;
+                  return <Redirect to="/app/welcome" />;
                 }} />
               </IonRouterOutlet>
               
               {/* Tab bar only for app section */}
               <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
+                <IonTabButton tab="welcome" href="/app/welcome" className="tab-button-welcome">
+                  <IonIcon aria-hidden="true" icon={home} />
+                  <IonLabel>{t('navigation.home') || 'Inicio'}</IonLabel>
+                </IonTabButton>
                 <IonTabButton tab="gallery" href="/app/gallery" className="tab-button-gallery">
                   <IonIcon aria-hidden="true" icon={images} />
                   <IonLabel>{t('navigation.gallery')}</IonLabel>

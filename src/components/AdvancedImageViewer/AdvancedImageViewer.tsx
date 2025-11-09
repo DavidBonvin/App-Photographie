@@ -72,10 +72,21 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
 
   const currentPhoto = photos[currentPhotoIndex];
   const controlsTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 769);
 
-  // Auto-hide controls
+  // Listen for window resize to update desktop state
   useEffect(() => {
-    if (showControls && isOpen) {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 769);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Auto-hide controls (only on mobile/tablet, not on desktop)
+  useEffect(() => {
+    if (showControls && isOpen && !isDesktop) {
       if (controlsTimeout.current) clearTimeout(controlsTimeout.current);
       controlsTimeout.current = setTimeout(() => {
         setShowControls(false);
@@ -84,7 +95,7 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
     return () => {
       if (controlsTimeout.current) clearTimeout(controlsTimeout.current);
     };
-  }, [showControls, isOpen]);
+  }, [showControls, isOpen, isDesktop]);
 
   // Reset image state when photo changes
   useEffect(() => {
@@ -92,6 +103,7 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
       setScale(1);
       setTranslateX(0);
       setTranslateY(0);
+      // On desktop, always show controls; on mobile, show initially
       setShowControls(true);
       setCurrentImageSrc(currentPhoto.src); // Start with preview image
       setIsHighResLoaded(false);
@@ -209,8 +221,10 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
           }
         }
       } else if (deltaX < 10 && deltaY < 10) {
-        // Tap - toggle controls
-        setShowControls(!showControls);
+        // Tap - toggle controls (only on mobile, not desktop)
+        if (!isDesktop) {
+          setShowControls(!showControls);
+        }
       }
     }
     
@@ -232,7 +246,6 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
 
   const toggleLike = () => {
     // TODO: Implement like functionality
-    console.log('Toggle like for photo:', currentPhoto.id);
   };
 
   const sharePhoto = async () => {
@@ -247,11 +260,10 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
       } else {
         // Fallback: Copy URL to clipboard
         await navigator.clipboard.writeText(window.location.href);
-        console.log('URL copied to clipboard');
         // TODO: Show toast notification
       }
-    } catch (error) {
-      console.error('Error sharing photo:', error);
+    } catch {
+      // Silent error handling for production
     }
   };
 
@@ -265,9 +277,26 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      console.log('Downloaded photo:', currentPhoto.title);
-    } catch (error) {
-      console.error('Error downloading photo:', error);
+    } catch {
+      // Silent error handling for production
+    }
+  };
+
+  // Mouse handlers for desktop hover effects
+  const handleMouseEnter = () => {
+    if (isDesktop) {
+      setShowControls(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // On desktop, we don't hide controls on mouse leave
+    // Controls stay visible with CSS opacity changes
+  };
+
+  const handleMouseMove = () => {
+    if (isDesktop) {
+      setShowControls(true);
     }
   };
 
@@ -288,6 +317,9 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onMouseMove={handleMouseMove}
         >
           <img
             ref={imageRef}
@@ -311,7 +343,7 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
         </div>
 
         {/* Album Navigation Indicators */}
-        <div className={`album-indicators ${showControls ? 'visible' : ''}`}>
+        <div className={`album-indicators ${showControls || isDesktop ? 'visible' : ''}`}>
           <div className="album-info">
             <IonIcon icon={chevronUp} className="album-nav-icon" />
             <span>{currentAlbum}</span>
@@ -320,12 +352,12 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
         </div>
 
         {/* Photo Counter */}
-        <div className={`photo-counter ${showControls ? 'visible' : ''}`}>
+        <div className={`photo-counter ${showControls || isDesktop ? 'visible' : ''}`}>
           {currentPhotoIndex + 1} / {photos.length}
         </div>
 
         {/* Controls Overlay */}
-        <div className={`controls-overlay ${showControls ? 'visible' : ''}`}>
+        <div className={`controls-overlay ${showControls || isDesktop ? 'visible' : ''} ${isDesktop ? 'desktop-mode' : ''}`}>
           {/* Top Button Bar - Left Side */}
           <div className="top-button-bar-left">
             <button className="control-btn" onClick={onClose} title="Cerrar">
@@ -375,7 +407,7 @@ const AdvancedImageViewer: React.FC<AdvancedImageViewerProps> = ({
         </div>
 
         {/* Photo Info Bar */}
-        <div className={`photo-info-bar ${showControls ? 'visible' : ''}`}>
+        <div className={`photo-info-bar ${showControls || isDesktop ? 'visible' : ''}`}>
           <h3>{currentPhoto.title}</h3>
           <p>{currentPhoto.description}</p>
         </div>
