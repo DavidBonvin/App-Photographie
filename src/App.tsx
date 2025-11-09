@@ -1,10 +1,9 @@
 import React from 'react';
-import { Redirect, Route, BrowserRouter } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
   IonLabel,
-  IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
@@ -17,6 +16,7 @@ import {
   IonItem,
   setupIonicReact
 } from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
 import { images, person, mail, home } from 'ionicons/icons';
 import { useTranslation } from './i18n/useTranslation';
 import SEOHead from './components/SEOHead';
@@ -25,48 +25,6 @@ import Welcome from './pages/Welcome';
 import Gallery from './pages/Gallery';
 import About from './pages/About';
 import Contact from './pages/Contact';
-
-// Navigation Component
-const NavigationItem: React.FC<{ 
-  to: string; 
-  icon: string; 
-  label: string;
-  basename: string;
-}> = ({ to, icon, label, basename }) => {
-  const handleClick = () => {
-    console.log('🔗 Navigating to:', `${basename}${to}`);
-    window.location.href = `${basename}${to}`;
-  };
-
-  return (
-    <IonItem button onClick={handleClick} routerDirection="none">
-      <IonIcon aria-hidden="true" icon={icon} slot="start" />
-      <IonLabel>{label}</IonLabel>
-    </IonItem>
-  );
-};
-
-// Tab Navigation Component
-const TabNavigationButton: React.FC<{ 
-  tab: string;
-  to: string; 
-  icon: string; 
-  label: string;
-  basename: string;
-  className?: string;
-}> = ({ tab, to, icon, label, basename, className }) => {
-  const handleClick = () => {
-    console.log('🔗 Tab navigating to:', `${basename}${to}`);
-    window.location.href = `${basename}${to}`;
-  };
-
-  return (
-    <IonTabButton tab={tab} onClick={handleClick} className={className}>
-      <IonIcon aria-hidden="true" icon={icon} />
-      <IonLabel>{label}</IonLabel>
-    </IonTabButton>
-  );
-};
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -129,7 +87,7 @@ const App: React.FC = () => {
   return (
   <IonApp>
     <SEOHead />
-    <BrowserRouter basename={basename}>
+    <IonReactRouter basename={basename}>
       {/* Menú lateral para móvil */}
       <IonMenu contentId="main-content" type="overlay" key={`menu-${language}`}>
         <IonHeader>
@@ -139,30 +97,22 @@ const App: React.FC = () => {
         </IonHeader>
         <IonContent className="menu-content">
           <IonList className="menu-list">
-            <NavigationItem 
-              to="/welcome" 
-              icon={home} 
-              label={t('navigation.home') || 'Inicio'} 
-              basename={basename}
-            />
-            <NavigationItem 
-              to="/app/gallery" 
-              icon={images} 
-              label={t('navigation.gallery')} 
-              basename={basename}
-            />
-            <NavigationItem 
-              to="/app/about" 
-              icon={person} 
-              label={t('navigation.about')} 
-              basename={basename}
-            />
-            <NavigationItem 
-              to="/app/contact" 
-              icon={mail} 
-              label={t('navigation.contact')} 
-              basename={basename}
-            />
+            <IonItem button routerLink="/welcome" routerDirection="none" onClick={() => console.log('🔗 Menu: Navigating to /welcome')}>
+              <IonIcon aria-hidden="true" icon={home} slot="start" />
+              <IonLabel>{t('navigation.home') || 'Inicio'}</IonLabel>
+            </IonItem>
+            <IonItem button routerLink="/app/gallery" routerDirection="none" onClick={() => console.log('🔗 Menu: Navigating to /app/gallery')}>
+              <IonIcon aria-hidden="true" icon={images} slot="start" />
+              <IonLabel>{t('navigation.gallery')}</IonLabel>
+            </IonItem>
+            <IonItem button routerLink="/app/about" routerDirection="none" onClick={() => console.log('🔗 Menu: Navigating to /app/about')}>
+              <IonIcon aria-hidden="true" icon={person} slot="start" />
+              <IonLabel>{t('navigation.about')}</IonLabel>
+            </IonItem>
+            <IonItem button routerLink="/app/contact" routerDirection="none" onClick={() => console.log('🔗 Menu: Navigating to /app/contact')}>
+              <IonIcon aria-hidden="true" icon={mail} slot="start" />
+              <IonLabel>{t('navigation.contact')}</IonLabel>
+            </IonItem>
           </IonList>
         </IonContent>
       </IonMenu>
@@ -192,7 +142,7 @@ const App: React.FC = () => {
           console.log('📱 App route render function called!');
           return (
             <IonTabs>
-              <IonRouterOutlet>
+              <div>
                 <Route exact path="/app/gallery" render={() => {
                   console.log('📸 Gallery route render function called!');
                   return <Gallery />;
@@ -209,40 +159,28 @@ const App: React.FC = () => {
                   console.log('🔄 App root route - redirecting to gallery');
                   return <Redirect to="/app/gallery" />;
                 }} />
-              </IonRouterOutlet>
+              </div>
               
               {/* Tab bar only for app section */}
               <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
-                <TabNavigationButton 
-                  tab="gallery" 
-                  to="/app/gallery" 
-                  icon={images} 
-                  label={t('navigation.gallery')} 
-                  basename={basename}
-                  className="tab-button-gallery"
-                />
-                <TabNavigationButton 
-                  tab="about" 
-                  to="/app/about" 
-                  icon={person} 
-                  label={t('navigation.about')} 
-                  basename={basename}
-                  className="tab-button-about"
-                />
-                <TabNavigationButton 
-                  tab="contact" 
-                  to="/app/contact" 
-                  icon={mail} 
-                  label={t('navigation.contact')} 
-                  basename={basename}
-                  className="tab-button-contact"
-                />
+                <IonTabButton tab="gallery" href="/app/gallery" className="tab-button-gallery" onClick={() => console.log('🔗 Tab: Navigating to /app/gallery')}>
+                  <IonIcon aria-hidden="true" icon={images} />
+                  <IonLabel>{t('navigation.gallery')}</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="about" href="/app/about" className="tab-button-about" onClick={() => console.log('🔗 Tab: Navigating to /app/about')}>
+                  <IonIcon aria-hidden="true" icon={person} />
+                  <IonLabel>{t('navigation.about')}</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="contact" href="/app/contact" className="tab-button-contact" onClick={() => console.log('🔗 Tab: Navigating to /app/contact')}>
+                  <IonIcon aria-hidden="true" icon={mail} />
+                  <IonLabel>{t('navigation.contact')}</IonLabel>
+                </IonTabButton>
               </IonTabBar>
             </IonTabs>
           );
         }} />
       </div>
-    </BrowserRouter>
+    </IonReactRouter>
   </IonApp>
 );
 };
