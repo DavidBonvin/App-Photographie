@@ -179,35 +179,6 @@ const App: React.FC = () => {
             </IonTabs>
           );
         }} />
-        
-        {/* Catch all route for debugging */}
-        <Route render={(props) => {
-          console.log('❓ Unmatched route:', props.location.pathname);
-          console.log('❓ Route props:', props);
-          return (
-            <div style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'blue',
-              color: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '24px',
-              zIndex: 9999
-            }}>
-              <div style={{ textAlign: 'center' }}>
-                <h1>🔍 ROUTE DEBUG</h1>
-                <p>Current path: {props.location.pathname}</p>
-                <p>Basename: {basename}</p>
-                <p>No route matched!</p>
-              </div>
-            </div>
-          );
-        }} />
       </div>
     </BrowserRouter>
   </IonApp>
