@@ -137,21 +137,6 @@ const App: React.FC = () => {
           return <Welcome />;
         }} />
         
-        {/* Debug route to catch all paths */}
-        <Route path="*" render={(props) => {
-          console.log('🔍 Debug route caught path:', props.location.pathname);
-          console.log('🔍 Full location:', props.location);
-          return (
-            <div style={{ padding: '20px', backgroundColor: 'red', color: 'white' }}>
-              <h2>🔍 Debug Route Catcher</h2>
-              <p><strong>Current path:</strong> {props.location.pathname}</p>
-              <p><strong>Basename:</strong> {basename}</p>
-              <p><strong>Expected path for Welcome:</strong> /welcome</p>
-              <p><strong>No route matched!</strong></p>
-            </div>
-          );
-        }} />
-        
         {/* Main app with tabs */}
         <Route path="/app" render={() => {
           console.log('📱 App route render function called!');
