@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+
+# Development files
+src
+cypress
+.vscode
+
+# Config files (keep only what's needed)
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Git
+.git
+.gitignore
+
+# GitHub specific
+.github
+
+# Other
+*.log
+*.tgz
+.DS_Store
