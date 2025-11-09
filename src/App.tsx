@@ -75,11 +75,15 @@ const App: React.FC = () => {
     : '';
   
   console.log('🏗️ Router basename determined:', basename);
+  console.log('🔍 Full pathname:', window.location.pathname);
+  console.log('📍 Relative pathname (without basename):', window.location.pathname.replace(basename, ''));
+  console.log('🎭 IonRouterOutlet will render with basename:', basename);
   
   // Add effect to log route changes
   React.useEffect(() => {
     console.log('🎭 App useEffect - pathname changed:', window.location.pathname);
-  }, []);
+    console.log('🎭 App useEffect - relative path:', window.location.pathname.replace(basename, ''));
+  }, [basename]);
   
   return (
   <IonApp>
@@ -117,45 +121,82 @@ const App: React.FC = () => {
       {/* Contenido principal */}
       <IonRouterOutlet id="main-content">
         {/* Welcome page - standalone without tabs */}
-        <Route exact path="/welcome">
-          <TestWelcome />
-        </Route>
+        <Route exact path="/welcome" render={() => {
+          console.log('🏠 Welcome route render function called!');
+          return <TestWelcome />;
+        }} />
         
         {/* Main app with tabs */}
-        <Route path="/app">
-          <IonTabs>
-            <IonRouterOutlet>
-              <Route exact path="/app/gallery">
-                <Gallery />
-              </Route>
-              <Route exact path="/app/about">
-                <About />
-              </Route>
-              <Route path="/app/contact">
-                <Contact />
-              </Route>
-              <Route exact path="/app">
-                <Redirect to="/app/gallery" />
-              </Route>
-            </IonRouterOutlet>
-            
-            {/* Tab bar only for app section */}
-            <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
-              <IonTabButton tab="gallery" href="/app/gallery" className="tab-button-gallery">
-                <IonIcon aria-hidden="true" icon={images} />
-                <IonLabel>{t('navigation.gallery')}</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="about" href="/app/about" className="tab-button-about">
-                <IonIcon aria-hidden="true" icon={person} />
-                <IonLabel>{t('navigation.about')}</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="contact" href="/app/contact" className="tab-button-contact">
-                <IonIcon aria-hidden="true" icon={mail} />
-                <IonLabel>{t('navigation.contact')}</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-          </IonTabs>
-        </Route>
+        <Route path="/app" render={() => {
+          console.log('📱 App route render function called!');
+          return (
+            <IonTabs>
+              <IonRouterOutlet>
+                <Route exact path="/app/gallery" render={() => {
+                  console.log('📸 Gallery route render function called!');
+                  return <Gallery />;
+                }} />
+                <Route exact path="/app/about" render={() => {
+                  console.log('👤 About route render function called!');
+                  return <About />;
+                }} />
+                <Route path="/app/contact" render={() => {
+                  console.log('📧 Contact route render function called!');
+                  return <Contact />;
+                }} />
+                <Route exact path="/app" render={() => {
+                  console.log('🔄 App root route - redirecting to gallery');
+                  return <Redirect to="/app/gallery" />;
+                }} />
+              </IonRouterOutlet>
+              
+              {/* Tab bar only for app section */}
+              <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
+                <IonTabButton tab="gallery" href="/app/gallery" className="tab-button-gallery">
+                  <IonIcon aria-hidden="true" icon={images} />
+                  <IonLabel>{t('navigation.gallery')}</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="about" href="/app/about" className="tab-button-about">
+                  <IonIcon aria-hidden="true" icon={person} />
+                  <IonLabel>{t('navigation.about')}</IonLabel>
+                </IonTabButton>
+                <IonTabButton tab="contact" href="/app/contact" className="tab-button-contact">
+                  <IonIcon aria-hidden="true" icon={mail} />
+                  <IonLabel>{t('navigation.contact')}</IonLabel>
+                </IonTabButton>
+              </IonTabBar>
+            </IonTabs>
+          );
+        }} />
+        
+        {/* Catch all route for debugging */}
+        <Route render={(props) => {
+          console.log('❓ Unmatched route:', props.location.pathname);
+          console.log('❓ Route props:', props);
+          return (
+            <div style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'blue',
+              color: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '24px',
+              zIndex: 9999
+            }}>
+              <div style={{ textAlign: 'center' }}>
+                <h1>🔍 ROUTE DEBUG</h1>
+                <p>Current path: {props.location.pathname}</p>
+                <p>Basename: {basename}</p>
+                <p>No route matched!</p>
+              </div>
+            </div>
+          );
+        }} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
