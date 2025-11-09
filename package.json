@@ -6,8 +6,8 @@
   "homepage": "https://davidbonvin.github.io/App-Photographie",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "build:vercel": "VERCEL=true npm run build",
+    "build": "npx tsc && npx vite build",
+    "build:vercel": "VERCEL=true npx tsc && npx vite build",
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
