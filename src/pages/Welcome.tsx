@@ -6,6 +6,7 @@ import { getAllPhotos } from '../data/photographyData';
 import './Welcome.css';
 
 const Welcome: React.FC = () => {
+  console.log('🚀 WELCOME COMPONENT CREATED!!! This should appear if Welcome renders');
   const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);

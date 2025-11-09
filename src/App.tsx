@@ -22,7 +22,7 @@ import { images, person, mail, home } from 'ionicons/icons';
 import { useTranslation } from './i18n/useTranslation';
 import SEOHead from './components/SEOHead';
 // import Welcome from './pages/Welcome';
-import TestWelcome from './pages/TestWelcome';
+import Welcome from './pages/Welcome';
 import Gallery from './pages/Gallery';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -85,38 +85,6 @@ const App: React.FC = () => {
     console.log('🎭 App useEffect - relative path:', window.location.pathname.replace(basename, ''));
   }, [basename]);
   
-  // Force immediate test - bypass routing for now
-  const isTestMode = window.location.pathname.includes('/welcome');
-  console.log('🔥 FORCE TEST MODE:', isTestMode);
-  
-  if (isTestMode) {
-    console.log('🔥 RETURNING TEST COMPONENT DIRECTLY!');
-    return (
-      <div style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'lime',
-        color: 'black',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '30px',
-        fontWeight: 'bold',
-        zIndex: 999999
-      }}>
-        <div style={{ textAlign: 'center', backgroundColor: 'white', padding: '30px', border: '5px solid black' }}>
-          <h1>🔥 DIRECT TEST SUCCESS!</h1>
-          <p>URL: {window.location.href}</p>
-          <p>Path: {window.location.pathname}</p>
-          <p>This bypasses all routing!</p>
-        </div>
-      </div>
-    );
-  }
-  
   return (
   <IonApp>
     <SEOHead />
@@ -152,10 +120,22 @@ const App: React.FC = () => {
 
       {/* Contenido principal */}
       <IonRouterOutlet id="main-content">
+        {(() => {
+          console.log('🎭 IonRouterOutlet rendering...');
+          console.log('🛣️ Current pathname for routing:', window.location.pathname);
+          console.log('🛣️ Basename for routing:', basename);
+          console.log('🛣️ Effective path for routing:', window.location.pathname.replace(basename, ''));
+          return null;
+        })()}
+        
         {/* Welcome page - standalone without tabs */}
-        <Route exact path="/welcome" render={() => {
+        <Route exact path="/welcome" render={(props) => {
           console.log('🏠 Welcome route render function called!');
-          return <TestWelcome />;
+          console.log('🏠 Route props:', props);
+          console.log('🏠 Route match:', props.match);
+          console.log('🏠 Route location:', props.location);
+          console.log('🎯 Rendering actual Welcome component...');
+          return <Welcome />;
         }} />
         
         {/* Main app with tabs */}
