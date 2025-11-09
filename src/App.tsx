@@ -22,6 +22,7 @@ import { images, person, mail, home } from 'ionicons/icons';
 import { useTranslation } from './i18n/useTranslation';
 import SEOHead from './components/SEOHead';
 import Welcome from './pages/Welcome';
+import TestWelcome from './pages/TestWelcome';
 import Gallery from './pages/Gallery';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -68,6 +69,13 @@ const App: React.FC = () => {
   console.log('📍 Current pathname:', window.location.pathname);
   console.log('🗣️ Navigation gallery translation:', t('navigation.gallery'));
   
+  // Determine base path for router
+  const basename = process.env.NODE_ENV === 'production' && window.location.hostname.includes('github.io') 
+    ? '/App-Photographie' 
+    : '';
+  
+  console.log('🏗️ Router basename determined:', basename);
+  
   // Add effect to log route changes
   React.useEffect(() => {
     console.log('🎭 App useEffect - pathname changed:', window.location.pathname);
@@ -76,7 +84,7 @@ const App: React.FC = () => {
   return (
   <IonApp>
     <SEOHead />
-    <IonReactRouter>
+    <IonReactRouter basename={basename}>
       {/* Menú lateral para móvil */}
       <IonMenu contentId="main-content" type="overlay" key={`menu-${language}`}>
         <IonHeader>
@@ -110,7 +118,7 @@ const App: React.FC = () => {
       <IonRouterOutlet id="main-content">
         {/* Welcome page - standalone without tabs */}
         <Route exact path="/welcome">
-          <Welcome />
+          <TestWelcome />
         </Route>
         
         {/* Main app with tabs */}

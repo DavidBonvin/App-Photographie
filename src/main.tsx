@@ -41,6 +41,8 @@ const handleInitialNavigation = () => {
     console.log('✅ Redirect needed! Going to:', welcomePath);
     window.history.replaceState(null, '', welcomePath);
     console.log('🔄 History updated, new path:', window.location.pathname);
+  } else if (currentPath === basePath + '/welcome') {
+    console.log('✅ Already at welcome page, no redirect needed');
   } else {
     console.log('❌ No redirect needed, current path is fine:', currentPath);
   }
