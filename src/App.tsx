@@ -1,3 +1,4 @@
+import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
@@ -61,8 +62,16 @@ setupIonicReact();
 const App: React.FC = () => {
   const { t, language } = useTranslation();
   
-  console.log('App component re-rendered with language:', language);
-  console.log('Navigation gallery translation:', t('navigation.gallery'));
+  console.log('🎨 App component rendering...');
+  console.log('🌍 Current language:', language);
+  console.log('🔗 Current URL:', window.location.href);
+  console.log('📍 Current pathname:', window.location.pathname);
+  console.log('🗣️ Navigation gallery translation:', t('navigation.gallery'));
+  
+  // Add effect to log route changes
+  React.useEffect(() => {
+    console.log('🎭 App useEffect - pathname changed:', window.location.pathname);
+  }, []);
   
   return (
   <IonApp>

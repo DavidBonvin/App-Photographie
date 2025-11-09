@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build:vercel",
   "outputDirectory": "dist",
   "framework": null,
   "installCommand": "npm install",
   "devCommand": "npm run dev",
+  "env": {
+    "VERCEL": "true"
+  },
   "rewrites": [
     {
       "source": "/(.*)",

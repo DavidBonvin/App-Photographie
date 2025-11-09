@@ -8,11 +8,12 @@
     "dev": "vite",
     "build": "npx tsc && npx vite build",
     "build:vercel": "VERCEL=true npx tsc && npx vite build",
+    "build:github": "npx tsc && npx vite build",
     "preview": "vite preview",
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build:github",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
