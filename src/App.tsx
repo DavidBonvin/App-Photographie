@@ -4,6 +4,7 @@ import {
   IonApp,
   IonIcon,
   IonLabel,
+  IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
@@ -142,7 +143,7 @@ const App: React.FC = () => {
           console.log('📱 App route render function called!');
           return (
             <IonTabs>
-              <div>
+              <IonRouterOutlet>
                 <Route exact path="/app/gallery" render={() => {
                   console.log('📸 Gallery route render function called!');
                   return <Gallery />;
@@ -159,7 +160,7 @@ const App: React.FC = () => {
                   console.log('🔄 App root route - redirecting to gallery');
                   return <Redirect to="/app/gallery" />;
                 }} />
-              </div>
+              </IonRouterOutlet>
               
               {/* Tab bar only for app section */}
               <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
