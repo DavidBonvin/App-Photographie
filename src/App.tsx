@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, BrowserRouter } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
@@ -17,7 +17,6 @@ import {
   IonItem,
   setupIonicReact
 } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
 import { images, person, mail, home } from 'ionicons/icons';
 import { useTranslation } from './i18n/useTranslation';
 import SEOHead from './components/SEOHead';
@@ -88,7 +87,7 @@ const App: React.FC = () => {
   return (
   <IonApp>
     <SEOHead />
-    <IonReactRouter basename={basename}>
+    <BrowserRouter basename={basename}>
       {/* Menú lateral para móvil */}
       <IonMenu contentId="main-content" type="overlay" key={`menu-${language}`}>
         <IonHeader>
@@ -119,9 +118,9 @@ const App: React.FC = () => {
       </IonMenu>
 
       {/* Contenido principal */}
-      <IonRouterOutlet id="main-content">
+      <div id="main-content">
         {(() => {
-          console.log('🎭 IonRouterOutlet rendering...');
+          console.log('🎭 Router content rendering...');
           console.log('🛣️ Current pathname for routing:', window.location.pathname);
           console.log('🛣️ Basename for routing:', basename);
           console.log('🛣️ Effective path for routing:', window.location.pathname.replace(basename, ''));
@@ -209,8 +208,8 @@ const App: React.FC = () => {
             </div>
           );
         }} />
-      </IonRouterOutlet>
-    </IonReactRouter>
+      </div>
+    </BrowserRouter>
   </IonApp>
 );
 };
