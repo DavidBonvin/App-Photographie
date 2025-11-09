@@ -640,3 +640,21 @@ ion-menu ion-title {
 .dark-theme .contact-hero {
   background: linear-gradient(135deg, #2a2a2a, #1e1e1e);
 }
+
+/* Fix menu height to full viewport */
+.menu-content-overlay {
+  height: 100vh !important;
+  min-height: 100vh !important;
+}
+
+/* Ensure all pages have full height */
+ion-content {
+  --background: transparent;
+  min-height: 100vh;
+}
+
+/* Ensure main content area has full height */
+#main-content {
+  min-height: 100vh;
+  position: relative;
+}

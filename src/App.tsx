@@ -97,19 +97,19 @@ const App: React.FC = () => {
         </IonHeader>
         <IonContent className="menu-content">
           <IonList className="menu-list">
-            <IonItem button routerLink="/welcome" routerDirection="none">
+            <IonItem button href={`${basename}/welcome`} routerDirection="none">
               <IonIcon aria-hidden="true" icon={home} slot="start" />
               <IonLabel>{t('navigation.home') || 'Inicio'}</IonLabel>
             </IonItem>
-            <IonItem button routerLink="/app/gallery" routerDirection="none">
+            <IonItem button href={`${basename}/app/gallery`} routerDirection="none">
               <IonIcon aria-hidden="true" icon={images} slot="start" />
               <IonLabel>{t('navigation.gallery')}</IonLabel>
             </IonItem>
-            <IonItem button routerLink="/app/about" routerDirection="none">
+            <IonItem button href={`${basename}/app/about`} routerDirection="none">
               <IonIcon aria-hidden="true" icon={person} slot="start" />
               <IonLabel>{t('navigation.about')}</IonLabel>
             </IonItem>
-            <IonItem button routerLink="/app/contact" routerDirection="none">
+            <IonItem button href={`${basename}/app/contact`} routerDirection="none">
               <IonIcon aria-hidden="true" icon={mail} slot="start" />
               <IonLabel>{t('navigation.contact')}</IonLabel>
             </IonItem>
@@ -163,15 +163,15 @@ const App: React.FC = () => {
               
               {/* Tab bar only for app section */}
               <IonTabBar slot="bottom" key={`tabbar-${language}`} className="iphone-tabbar">
-                <IonTabButton tab="gallery" href="/app/gallery" className="tab-button-gallery">
+                <IonTabButton tab="gallery" href={`${basename}/app/gallery`} className="tab-button-gallery">
                   <IonIcon aria-hidden="true" icon={images} />
                   <IonLabel>{t('navigation.gallery')}</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="about" href="/app/about" className="tab-button-about">
+                <IonTabButton tab="about" href={`${basename}/app/about`} className="tab-button-about">
                   <IonIcon aria-hidden="true" icon={person} />
                   <IonLabel>{t('navigation.about')}</IonLabel>
                 </IonTabButton>
-                <IonTabButton tab="contact" href="/app/contact" className="tab-button-contact">
+                <IonTabButton tab="contact" href={`${basename}/app/contact`} className="tab-button-contact">
                   <IonIcon aria-hidden="true" icon={mail} />
                   <IonLabel>{t('navigation.contact')}</IonLabel>
                 </IonTabButton>
