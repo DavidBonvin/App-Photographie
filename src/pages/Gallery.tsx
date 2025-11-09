@@ -15,9 +15,6 @@ const Gallery: React.FC = () => {
   
   const { t, language } = useTranslation();
 
-  console.log('Gallery component re-rendered with language:', language);
-  console.log('Gallery title translation:', t('gallery.title'));
-
   // Get current photos based on selected album
   const getCurrentPhotos = (): Photo[] => {
     if (selectedAlbum === 'all') {

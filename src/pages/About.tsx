@@ -8,8 +8,6 @@ import './About.css';
 const About: React.FC = () => {
   const { language, t, tArray } = useTranslation();
   
-  console.log('About component re-rendered with language:', language);
-  console.log('About title translation:', t('about.title'));
   // Base URL para imágenes - funciona tanto local como en GitHub Pages
   const baseUrl = import.meta.env.DEV ? '/' : import.meta.env.BASE_URL;
 

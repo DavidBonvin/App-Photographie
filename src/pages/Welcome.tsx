@@ -6,60 +6,44 @@ import { getAllPhotos } from '../data/photographyData';
 import './Welcome.css';
 
 const Welcome: React.FC = () => {
-  console.log('🚀 WELCOME COMPONENT CREATED!!! This should appear if Welcome renders');
   const { t } = useTranslation();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showContent, setShowContent] = useState(false);
   const [textPhase, setTextPhase] = useState<'entering' | 'visible' | 'exiting'>('entering');
   
-  console.log('🏠 Welcome component rendering...');
-  console.log('🌍 Welcome - Current URL:', window.location.href);
-  console.log('📍 Welcome - Current pathname:', window.location.pathname);
-  
   const photos = getAllPhotos();
-  console.log('📸 Welcome - Photos loaded:', photos.length, 'items');
   
   // Cycle through images every 8 seconds
   useEffect(() => {
-    console.log('🖼️ Welcome - Setting up image cycle...');
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => {
         const newIndex = (prevIndex + 1) % photos.length;
-        console.log('🔄 Welcome - Image cycle:', prevIndex, '->', newIndex);
         return newIndex;
       });
     }, 8000);
     
     return () => {
-      console.log('🧹 Welcome - Cleaning up image cycle');
       clearInterval(interval);
     };
   }, [photos.length]);
   
   // Text animation cycle
   useEffect(() => {
-    console.log('✨ Welcome - Setting up text animation...');
-    
     const cycleText = () => {
-      console.log('🎭 Welcome - Text cycle starting');
       setTextPhase('entering');
       setTimeout(() => {
-        console.log('👀 Welcome - Text visible');
         setTextPhase('visible');
       }, 1000);
       setTimeout(() => {
-        console.log('👋 Welcome - Text exiting');
         setTextPhase('exiting');
       }, 4000);
       setTimeout(() => {
-        console.log('🔄 Welcome - Text cycle restarting');
         setTextPhase('entering');
       }, 5000);
     };
     
     // Initial delay
     setTimeout(() => {
-      console.log('📱 Welcome - Showing content');
       setShowContent(true);
     }, 500);
     
@@ -68,15 +52,11 @@ const Welcome: React.FC = () => {
     cycleText();
     
     return () => {
-      console.log('🧹 Welcome - Cleaning up text animation');
       clearInterval(textInterval);
     };
   }, []);
   
   const currentPhoto = photos[currentImageIndex];
-  console.log('🖼️ Welcome - Current photo:', currentPhoto?.title || 'No photo');
-  
-  console.log('🎨 Welcome - Rendering JSX...');
   
   return (
     <IonPage className="welcome-page">

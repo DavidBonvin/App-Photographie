@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useState, ReactNode } from 'react';
 
 export type Language = 'es' | 'fr' | 'en';
 
@@ -523,12 +523,7 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({ childr
     return (saved as Language) || 'fr';
   });
 
-  useEffect(() => {
-    console.log('Translation context mounted with language:', language);
-  }, [language]);
-
   const changeLanguage = (lang: Language) => {
-    console.log('Context: Changing language from', language, 'to', lang);
     setLanguage(lang);
     localStorage.setItem('portfolio-language', lang);
   };
@@ -537,14 +532,11 @@ export const TranslationProvider: React.FC<TranslationProviderProps> = ({ childr
     const keys = key.split('.');
     let value: unknown = translations[language];
     
-    console.log('Context: Translating key:', key, 'for language:', language);
-    
     for (const k of keys) {
       value = (value as Record<string, unknown>)?.[k];
     }
     
     const result = typeof value === 'string' ? value : key;
-    console.log('Context: Translation result:', result);
     return result;
   };
 

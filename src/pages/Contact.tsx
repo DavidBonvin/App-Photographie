@@ -9,8 +9,6 @@ import './Contact.css';
 const Contact: React.FC = () => {
   const { t, language } = useTranslation();
   
-  console.log('Contact component re-rendered with language:', language);
-  console.log('Contact title translation:', t('contact.title'));
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,7 +27,6 @@ const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Aquí iría la lógica para enviar el formulario
-    console.log('Formulario enviado:', formData);
     alert(t('contact.form.successMessage'));
   };
 
